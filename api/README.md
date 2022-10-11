@@ -1,4 +1,4 @@
-# Final Project REST-API By Yang Ming
+# Final Project
 
 ## setup
 1. npm install

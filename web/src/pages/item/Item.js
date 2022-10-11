@@ -192,7 +192,7 @@ export default function ItemList({ user }) {
             <ExportButton onExport={async () => {
               const result = await HandleAction('export', null, null);
               if (result) {
-                ExportToCsv(result.data, 'Group5-item-export.csv');
+                ExportToCsv(result.data, 'item-export.csv');
               } else {
                 message.error('Export is error, please try again');
               }
