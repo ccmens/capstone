@@ -1,23 +1,23 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules
 
 # testing
-/coverage
+coverage
 
 # production
-/build
+build
+group5-api.zip
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env
+npm-debug.log
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# ignore api node_modules
+./api/node_modules
+
+# ignore manager node_modules
+./manager/node_modules
+
+# ignore web node_modules
+./web/node_modules

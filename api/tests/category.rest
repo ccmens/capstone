@@ -1,0 +1,25 @@
+### get item list
+GET http://127.0.0.1:3001/api/item
+
+### get item by id
+GET http://127.0.0.1:3001/api/item/62e33b9ec3cce27707745895
+
+###
+POST http://127.0.0.1:3001/api/item
+Content-Type: application/json
+
+{
+    "item_name": "item1"
+}
+
+###
+PUT http://127.0.0.1:3001/api/item/62e33b9ec3cce27707745895
+Content-Type: application/json
+
+{
+    "item_name": "item11"
+}
+
+
+### delete item by id
+DELETE  http://127.0.0.1:3001/api/item/62e33b4bc3cce2770774588a

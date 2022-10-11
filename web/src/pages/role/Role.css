@@ -1,0 +1,22 @@
+/* @import '~antd/dist/antd.css'; */
+
+.ant-table-thead tr th {
+    background-color: #333;
+    color: #fff;
+    font-size: 18px;
+}
+
+.role-wrap {
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 20px;
+}
+
+.role-wrap h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.role-wrap button {
+    margin-bottom: 10px;
+}

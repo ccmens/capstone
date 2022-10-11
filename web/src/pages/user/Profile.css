@@ -1,0 +1,23 @@
+.profile-wrap {
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 20px;
+}
+
+.profile-wrap h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.profile-form {
+    max-width: 500px;
+}
+
+.profile-avatar {
+    display: flex;
+    gap: 10px;
+    /* justify-content: center; */
+    align-items: center;
+    margin-bottom: 20px;
+}

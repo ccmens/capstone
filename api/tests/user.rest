@@ -1,0 +1,39 @@
+### get user list
+GET http://127.0.0.1:3001/api/user
+
+### get user by id
+GET http://127.0.0.1:3001/api/user/62e1756fe0f7611d22a9dd63
+
+###
+POST http://127.0.0.1:3001/api/user
+Content-Type: application/json
+
+{
+    "email": "cuser456",
+    "password": "password",
+    "first_name": "Dean",
+    "last_name": "Admin",
+    "role": "62e6f5ff0107553c50e45b18"
+}
+
+###
+PUT http://127.0.0.1:3001/api/user/62e1756fe0f7611d22a9dd63
+Content-Type: application/json
+
+{
+    "email": "admin1@admin.com",
+    "rollno": "11111"
+}
+
+### login test
+POST http://127.0.0.1:3001/api/user/login
+Content-Type: application/json
+
+{
+    "email": "user456@gmail.com",
+    "password": "password"
+}
+
+
+### delete user by id
+DELETE  http://127.0.0.1:3001/api/user/62e1756fe0f7611d22a9dd63

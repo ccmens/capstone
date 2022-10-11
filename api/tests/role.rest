@@ -1,0 +1,25 @@
+### get role list
+GET http://127.0.0.1:3001/api/role
+
+### get role by id
+GET http://127.0.0.1:3001/api/role/62e33b2ec3cce27707745884
+
+###
+POST http://127.0.0.1:3001/api/role
+Content-Type: application/json
+
+{
+    "role_name": "admin"
+}
+
+###
+PUT http://127.0.0.1:3001/api/role/62e33b2ec3cce27707745884
+Content-Type: application/json
+
+{
+    "role_name": "user"
+}
+
+
+### delete role by id
+DELETE  http://127.0.0.1:3001/api/role/62e33b4bc3cce2770774588a

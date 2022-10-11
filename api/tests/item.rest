@@ -1,0 +1,25 @@
+### get category list
+GET http://127.0.0.1:3001/api/category
+
+### get category by id
+GET http://127.0.0.1:3001/api/category/62e33b9ec3cce27707745895
+
+###
+POST http://127.0.0.1:3001/api/category
+Content-Type: application/json
+
+{
+    "item_name": "itemname"
+}
+
+###
+PUT http://127.0.0.1:3001/api/category/62e33b9ec3cce27707745895
+Content-Type: application/json
+
+{
+    "category_name": "item11"
+}
+
+
+### delete category by id
+DELETE  http://127.0.0.1:3001/api/category/62e33b4bc3cce2770774588a

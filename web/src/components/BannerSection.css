@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+.banner-section {
+    margin: 0 auto;
+    background-size: cover;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    gap: 20px;
+  }
+  
+  .banner-section h1 {
+    font-family: 'Orbitron',sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+  }
+  

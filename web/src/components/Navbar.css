@@ -1,0 +1,104 @@
+/* navbar */
+nav {
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.navbar {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px;
+  flex: 1;
+  text-align: left;
+  text-shadow: 2px 2px #ccc;
+}
+
+.navbar .menu {
+  flex: 4;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu .menu-link {
+  font-size: 20px;
+  padding: 0.55rem 1rem;
+  border-radius: 5px;
+}
+
+.menu .menu-link:hover, .active {
+  background-color: #d92626;
+  color: #fff;
+}
+
+.btn-login {
+  background-color: #353944;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 20px;
+  border-radius: 5px;
+  color: #fff;
+  border: #353944 1px solid;
+}
+
+.btn-login:hover {
+  background-color: #fff;
+  color: #353944;
+}
+
+.btn-register {
+  background-color: transparent;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 20px;
+  border-radius: 5px;
+  border: #353944 1px solid;
+}
+
+.btn-register:hover {
+  background-color: #353944;
+  color: #fff;
+}
+
+.userinfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+}
+
+@media screen and (max-width: 960px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .menu {
+    flex-direction: column;
+  }
+  .nav-menu {
+    display: block;
+  }
+}
