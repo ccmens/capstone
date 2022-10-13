@@ -107,7 +107,7 @@ export default function Category({
         <>
             <BannerSection color="#fff" title="Products Management" />
             <div className='category-wrap'>
-                <h3 className='common-title'>Category List</h3>
+                <h3 className='common-title'>Products List</h3>
                 <Button type="primary" size='large' onClick={() => showModal(null)}>Add</Button>
                 <CategoryForm
                     handleSubmit={handleSubmit}

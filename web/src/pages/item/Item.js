@@ -85,7 +85,7 @@ export default function ItemList({ user }) {
       render: (_, row) => <img alt={row.name} width={60} height={60} src={row.image || '/images/default-item.png'} />,
     },
     {
-      title: 'Category',
+      title: 'Products',
       dataIndex: 'category',
       render: (_, row) => row.category?.category_name,
     },
