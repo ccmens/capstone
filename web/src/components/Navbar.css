@@ -38,27 +38,29 @@ nav {
   font-size: 20px;
   padding: 0.55rem 1rem;
   border-radius: 5px;
+  border: #353944 1px solid;
 }
 
 .menu .menu-link:hover, .active {
-  background-color: #d92626;
-  color: #fff;
+  background-color: #d92626
+  
+  ;
+  color: rgb(22, 13, 13);
 }
 
 .btn-login {
-  background-color: #353944;
+  background-color: transparent;
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-weight: 400;
   font-size: 20px;
   border-radius: 5px;
-  color: #fff;
   border: #353944 1px solid;
 }
 
 .btn-login:hover {
-  background-color: #fff;
-  color: #353944;
+  background-color: #353944;
+  color: #fff;
 }
 
 .btn-register {
