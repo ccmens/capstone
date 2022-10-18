@@ -37,7 +37,7 @@ const CategoryForm = ({
                 <Form.Item
                     label="Product Name"
                     name="category_name"
-                    rules={[{ required: true, message: 'Please enter category name!' }]}
+                    rules={[{ required: true, message: 'Please enter product name!' }]}
                 >
                     <Input />
                 </Form.Item>
