@@ -6,7 +6,7 @@ categoryMiddle.getCategory = async (req, res, next) => {
         const category = await categoryModel.findOne({ _id: req.params.id });
         console.log('getCategory:', category);
         if (category == null) {
-            return res.status(404).json({ status: 'error', message: 'Cannot find products' })
+            return res.status(404).json({ status: 'error', message: 'Cannot find category' })
         }
         res.category = category
         next()

@@ -14,7 +14,7 @@ itemMiddle.upload = multer({
 
 itemMiddle.valid_item = [
     check('item_name').isLength({ min: 2, max: 30 }).withMessage('Name is required'),
-    check('category').isLength({ min: 2, max: 30 }).withMessage('Products is required'),
+    check('category').isLength({ min: 2, max: 30 }).withMessage('Category is required'),
     check('price').isLength({ min: 2, max: 30 }).withMessage('Price is required'),
 ];
 

@@ -32,7 +32,7 @@ categoryController.add = async (req, res) => {
             category_name: category_name
         });
         await category.save();
-        res.status(201).json({ status: 'success', message: 'Add new product successful' })
+        res.status(201).json({ status: 'success', message: 'Add new category successful' })
     } catch (error) {
         helper.resError(res, error.message);
     }
@@ -46,7 +46,7 @@ categoryController.update = async (req, res) => {
         res.category.create_at = Date.now();
 
         await res.category.save();
-        res.status(201).json({ status: 'success', message: 'Update product successful' })
+        res.status(201).json({ status: 'success', message: 'Update category successful' })
     } catch (error) {
         helper.resError(res, error.message);
     }
@@ -55,7 +55,7 @@ categoryController.update = async (req, res) => {
 categoryController.delete = async (req, res) => {
     try {
         await res.category.remove();
-        res.json({ status: 'success', message: 'product deleted' });
+        res.json({ status: 'success', message: 'Category deleted' });
     } catch (error) {
         helper.resError(res, error.message);
     }
