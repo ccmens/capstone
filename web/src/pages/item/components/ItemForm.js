@@ -120,9 +120,9 @@ export default function ItemForm({
         </Form.Item>
 
         <Form.Item
-          label="Category"
+          label="Product"
           name="category"
-          rules={[{ required: true, message: "Please select a category!" }]}
+          rules={[{ required: true, message: "Please select a product!" }]}
         >
           <Select
             options={categoryList.map((item) => ({
