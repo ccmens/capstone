@@ -236,8 +236,7 @@ userController.update = async (req, res) => {
         helper.resError(res, error.message);
     }
 };
-
-userController.delete = async (req, res) => {
+ userController.delete = async (req, res) => {
     try {
         if (res.user.deleted) {
             // delete items
@@ -247,20 +246,36 @@ userController.delete = async (req, res) => {
                 if (item?.image) {
                     helper.deleteUploadFile('item', item?.image);
                 }
-            }
-            await itemModel.removeMany({ owner: res.user._id });
             await res.user.remove();
-        } else {
+        }
+     } else {
             res.user.deleted = true;
             res.user.active = false;
             res.user.update_at = Date.now();
             await res.user.save();
         }
+    
+        res.json({ status: 'success', message: 'User deleted' });
+    } catch (error) {
+        helper.resError(res, error.message);
+    }
+   
+}; 
+
+/*
+userController.delete = async (req, res) => {
+    try {
+        res.user.deleted = true;
+        res.user.active = false;
+        res.user.update_at = Date.now();
+        await res.user.remove();
+        await res.user.save();
         res.json({ status: 'success', message: 'User deleted' });
     } catch (error) {
         helper.resError(res, error.message);
     }
 };
+*/
 
 userController.recover = async (req, res) => {
     try {

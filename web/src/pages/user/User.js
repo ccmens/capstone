@@ -105,7 +105,11 @@ export default function UserList({
               })
             }
           >
-            {row.deleted ? 'Delete Permanently' : 'Delete'}
+
+            
+             {row.deleted ? 'Delete Permanently' : 'Delete'} 
+             
+            
           </Button>
           {row.deleted && (<Button type='primary'
             onClick={() =>
