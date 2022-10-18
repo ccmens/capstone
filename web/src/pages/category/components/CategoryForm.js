@@ -19,7 +19,7 @@ const CategoryForm = ({
     }, [formRef, currentRow]);
 
     return (
-        <Modal title={currentRow ? 'Edit Category' : 'Add Category'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
+        <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
             <Form
                 name="category form"
                 labelCol={{ span: 8 }}
@@ -35,7 +35,7 @@ const CategoryForm = ({
                 ref={setFormRef}
             >
                 <Form.Item
-                    label="Category Name"
+                    label="Product Name"
                     name="category_name"
                     rules={[{ required: true, message: 'Please enter category name!' }]}
                 >

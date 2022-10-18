@@ -48,7 +48,7 @@ export default function Category({
         //     dataIndex: '_id',
         // },
         {
-            title: 'Category Name',
+            title: 'Products Name',
             dataIndex: 'category_name',
         },
         {
@@ -67,7 +67,7 @@ export default function Category({
                         //     await HandleAction('delete', row._id, null);
                         //     setLoading(true);
                         // })
-                        message.error('Category cannot delete')
+                        message.error('Product cannot delete')
                     }>Delete</Button>
                 </Space>
             ),
