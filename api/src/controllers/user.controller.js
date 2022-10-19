@@ -236,19 +236,16 @@ userController.update = async (req, res) => {
         helper.resError(res, error.message);
     }
 };
+
+
  userController.delete = async (req, res) => {
     try {
         if (res.user.deleted) {
-            // delete items
-            const items = await itemModel.find({ owner: res.user._id });
-            for (let item of items) {
-                // delete images
-                if (item?.image) {
-                    helper.deleteUploadFile('item', item?.image);
-                }
+            
             await res.user.remove();
         }
-     } else {
+        
+     else {
             res.user.deleted = true;
             res.user.active = false;
             res.user.update_at = Date.now();

@@ -88,9 +88,7 @@ export default function LoginV2({ handleAction }) {
             message="Test Accounts"
             description={`
                             admin123@gmail.com,password (admin);
-                            admin456@gmail.com,password (admin);
-                            user123@gmail.com,password (user);
-                            user456@gmail.com,password (user)`}
+                            `}
             type="info"
             showIcon
           />
