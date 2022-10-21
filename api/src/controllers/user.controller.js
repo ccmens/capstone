@@ -76,8 +76,9 @@ userController.export = async (req, res) => {
             const count = items.length;
             const total_value = await items.reduce((acc, item) => acc + item.price, 0);
             const tmp = {
-                Id: user._id,
+                Name: user.first_name,
                 Email: user.email,
+                isActive:user.active,
                 Number_Of_Items: count,
                 Total_Value: total_value
             };

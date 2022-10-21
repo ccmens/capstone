@@ -1,5 +1,5 @@
 const itemModel = require("../models/item.model");
-const userModel = require("../models/user.model");
+const categoryModel = require("../models/category.model");
 const helper = require("../utils/helper");
 // const config = require('../config');
 const resize = require('../utils/resize');
@@ -143,29 +143,36 @@ itemController.export = async (req, res) => {
   try {
     console.log('export:', req.body)
     let results = [];
-    const users = await userModel.find({ active: true }).populate("role");
-    for (const user of users) {
-      if (user.role.role_name != "user")
-        continue;
-      const items = await itemModel.find({ owner: user._id });
-      const count = items.length;
-      const tmp = {
-        Name: `${user.last_name}, ${user.first_name}`,
-        First: user.first_name,
-        Last: user.last_name,
-        Number_Of_Items: count,
+    //const users = await userModel.find({ active: true }).populate("role");
+   // for (const user of users) {
+      //if (user.role.role_name != "user")
+        //continue;
+      
+      //const items = await itemModel.find();
+      const items = await itemModel.find({deleted : false}).populate("category");
+      for (const item of items){
+       
+       const tmp = {
+        Name: item.item_name,
+        Product: item.category.category_name,
+        Price:item.price 
       };
+
+
       results.push(tmp);
+  
     };
+   /* };
 
     results.sort(function (a, b) {
       return a.Last.localeCompare(b.Last) || a.First.localeCompare(b.First) || b.Number_Of_Items - a.Number_Of_Items;
     });
-
+ 
     results.forEach(item=>{
       delete item.First;
       delete item.Last;
     })
+*/
 
     res.json({
       status: 'success',
