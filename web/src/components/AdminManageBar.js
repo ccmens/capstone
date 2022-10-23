@@ -14,6 +14,7 @@ export default function AdminManageBar({
             <NavLink to='/rolelist' className={NavActive}>Role Management</NavLink>
             <NavLink to='/items' className={NavActive}>Parts Management</NavLink>
             <NavLink to='/category' className={NavActive}>Products Management</NavLink>
+            <NavLink to='/charts' className={NavActive}>Report</NavLink>
             <Button onClick={handleLogout}>Logout</Button>
         </div>
     )

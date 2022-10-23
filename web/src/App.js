@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, fushioncharts } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginV2 from './pages/user/LoginV2';
@@ -15,10 +15,11 @@ import Role from '@pages/role/Role';
 import Profile from '@pages/user/Profile';
 import ConfirmComponent from '@components/ConfirmComponent';
 import TitleComponent from '@components/TitleComponent';
-
+import StackedChart from './pages/Charts/components/Stacked'
 import ErrorPage403 from './ErrorPage403';
 import ErrorPage404 from './ErrorPage404';
 import ErrorPage500 from './ErrorPage500';
+
 
 function App() {
 
@@ -108,6 +109,7 @@ function App() {
         <Route path="/error403" element={<ErrorPage403 />} />
         <Route path="/error404" element={<ErrorPage404 />} />
         <Route path="/error500" element={<ErrorPage500 />} />
+        <Route path="/charts" element={<StackedChart />} />
       </Routes>
       <Footer />
     </>

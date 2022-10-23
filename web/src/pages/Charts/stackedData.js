@@ -1,6 +1,4 @@
 import React from 'react';
-import { AiOutlineBarChart } from 'react-icons/ai';
-
 
 export const stackedChartData = [
   [
