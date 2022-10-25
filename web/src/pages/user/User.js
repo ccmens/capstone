@@ -106,10 +106,10 @@ export default function UserList({
             }
           >
 
-            
-             {row.deleted ? 'Delete Permanently' : 'Delete'} 
-             
-            
+
+            {row.deleted ? 'Delete Permanently' : 'Delete'}
+
+
           </Button>
           {row.deleted && (<Button type='primary'
             onClick={() =>
@@ -164,7 +164,7 @@ export default function UserList({
       }
     }
     getRoleList();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, user]);
 
   return (
