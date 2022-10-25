@@ -21,3 +21,5 @@ npm-debug.log
 
 # ignore web node_modules
 ./web/node_modules
+api/src/config.js
+api/src/config.js
