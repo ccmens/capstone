@@ -21,7 +21,9 @@ export default function LoginV2({ handleAction }) {
   const onReset = () => {
     form.resetFields();
   };
-
+  const onForgot = () => {
+    message.success("Please contact Dev Team for further change.");
+  };
   return (
     <>
       <BannerSection title="Login" background="/images/login-hero.jpg" />
@@ -71,6 +73,9 @@ export default function LoginV2({ handleAction }) {
 
             <Form.Item name="remember" valuePropName="checked">
               <Checkbox>Remember me</Checkbox>
+              <a style={{ float: 'right' }} onClick={onForgot}>
+              Forgot password
+            </a>
             </Form.Item>
 
             <Form.Item>
