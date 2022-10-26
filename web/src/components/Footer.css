@@ -1,14 +1,24 @@
+footer {
+  background-color: #111;
+  color: #ffffff;
+  padding: 3rem 3rem;
 
-
-.footer {
-    font-size: 20px;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
+  width: 100%;
+  display: flex;
 }
 
+a {
+  color: #ffffff;
+}
+
+.footer-text {
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-nav > * {
+  margin: 0 3rem;
+}

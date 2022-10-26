@@ -13,6 +13,14 @@
     margin-bottom: 10px;
 }
 
+.flex{
+display: flex;
+}
+
+.justify-between{
+justify-content: space-between;
+}
+
 .search-header {
     display: flex;
 }

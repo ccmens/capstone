@@ -202,29 +202,32 @@ const ItemList = ({user}) => {
 
                 <h3 className='common-title'>Item List</h3>
 
-                <Row>
-                    <Space>
-                        <BUTTON type="primary" size='large' onClick={() => showModal(null)}>Add</BUTTON>
-                        <EXPORTBUTTON onExport={async () => {
-                            const result = await HandleAction('export', null, null);
-                            if (result) {
-                                ExportToCsv(result.data, 'item-export.csv');
-                            } else {
-                                message.error('Export is error, please try again');
-                            }
-                        }}>
-                            Export to CSV
-                        </EXPORTBUTTON>
-                    </Space>
-                </Row>
-                <Row>
-                    <Col>
-                        Search Item By Name:
-                        <Input value={search} size='large' onChange={(e) => setSearch(e.target.value)}
-                               placeholder="Enter item name" style={{width: 200, marginLeft: '1rem'}}/>
-                        <BUTTON size='large' onClick={() => setSearch('')}>Clear</BUTTON>
-                    </Col>
-                </Row>
+                <div className='flex justify-between'>
+                    <Row>
+                        <Space>
+                            <BUTTON type="primary" size='large' onClick={() => showModal(null)}>Add</BUTTON>
+                            <EXPORTBUTTON onExport={async () => {
+                                const result = await HandleAction('export', null, null);
+                                if (result) {
+                                    ExportToCsv(result.data, 'item-export.csv');
+                                } else {
+                                    message.error('Export is error, please try again');
+                                }
+                            }}>
+                                Export to CSV
+                            </EXPORTBUTTON>
+                        </Space>
+                    </Row>
+                    <Row>
+                        <Col>
+                            Search Item By Name:
+                            <Input value={search} size='large' onChange={(e) => setSearch(e.target.value)}
+                                   placeholder="Enter item name" style={{width: 200, marginLeft: '1rem', marginRight: '1rem'}}/>
+                            <BUTTON size='large' onClick={() => setSearch('')}>Clear</BUTTON>
+                        </Col>
+                    </Row>
+                    
+                </div >
                 <Table style={{marginTop: '10px'}} columns={columns} dataSource={tableList}/>
                 <ItemForm
                     handleSubmit={handleSubmit}
