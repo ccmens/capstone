@@ -44,12 +44,20 @@ const Category = ({user}) => {
 
     const columns = [
         // {
-        //     title: 'Id',
-        //     dataIndex: '_id',
-        // },
+         // title: 'Id',
+         // dataIndex: '_id',
+         //},
         {
             title: 'Products Name',
             dataIndex: 'category_name',
+        },
+        {
+            title: 'Product Stock',
+            dataIndex: 'category_qty',
+        },
+        {
+            title: 'Product Price',
+            dataIndex: 'category_price',
         },
         {
             title: 'Create At',
