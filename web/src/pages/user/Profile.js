@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import "./Profile.css"
-import { message, Button, Form, Input, Upload } from 'antd';
+import {message, Button, Form, Input, Upload} from 'antd';
 import ConfirmComponent from '@components/ConfirmComponent';
-import { upload } from '@services/api.service';
+import {upload} from '@services/api.service';
 
-export default function Profile({
-    user,
-    handleAction
-}) {
+const Profile = ({user, handleAction}) => {
 
     const [formRef, setFormRef] = useState(null);
     const [fileList, setFileList] = useState([]);
@@ -98,7 +95,8 @@ export default function Profile({
                         listType="picture-card"
                         fileList={fileList}
                         onChange={handleChange}
-                        customRequest={() => { }}
+                        customRequest={() => {
+                        }}
                     >
                         {fileList.length < 1 && '+ Upload'}
                     </Upload>
@@ -114,33 +112,33 @@ export default function Profile({
                     <Form.Item
                         label="Password"
                         name="password"
-                        rules={[{ min: 6, message: 'Password at least 6 characters' }]}
+                        rules={[{min: 6, message: 'Password at least 6 characters'}]}
                     >
-                        <Input.Password />
+                        <Input.Password/>
                     </Form.Item>
 
                     <Form.Item
                         label="Confirm Password"
                         name="confirm_password"
-                        rules={[{ min: 6, message: 'Confirm Password at least 6 characters' }]}
+                        rules={[{min: 6, message: 'Confirm Password at least 6 characters'}]}
                     >
-                        <Input.Password />
+                        <Input.Password/>
                     </Form.Item>
 
                     <Form.Item
                         label="First Name"
                         name="first_name"
-                        rules={[{ required: true, message: 'Please input your first name!' }]}
+                        rules={[{required: true, message: 'Please input your first name!'}]}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
 
                     <Form.Item
                         label="Last Name"
                         name="last_name"
-                        rules={[{ required: true, message: 'Please input your last name!' }]}
+                        rules={[{required: true, message: 'Please input your last name!'}]}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
 
                     <Form.Item>
@@ -159,3 +157,5 @@ export default function Profile({
         </div>
     )
 }
+
+export default Profile;

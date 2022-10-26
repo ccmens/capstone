@@ -31,7 +31,6 @@ export default function RegisterV2({ handleAction }) {
 
   return (
     <>
-      <BannerSection title="Register" />
 
       <div className="register-wrap">
         {/* <h3>Register</h3> */}

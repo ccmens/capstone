@@ -1,6 +1,6 @@
 import './Role.css';
-import { Table, Button, Space, message } from 'antd';
-import React, { useState, useEffect } from 'react';
+import {Table, Button, Space, message} from 'antd';
+import React, {useState, useEffect} from 'react';
 import {
     roleList as roleListAPI, roleAdd, roleUpdate, roleDelete
 } from '@services/api.service';
@@ -8,6 +8,8 @@ import RoleForm from './components/RoleForm';
 import BannerSection from '@components/BannerSection';
 // import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
+import AdminManageBar from "../../components/AdminManageBar";
+import UserManageBar from "../../components/UserManageBar";
 
 async function HandleAction(action, id, params) {
     try {
@@ -28,9 +30,7 @@ async function HandleAction(action, id, params) {
     }
 }
 
-export default function Role({
-    user
-}) {
+const Role = ({user}) => {
 
     const [loading, setLoading] = useState(true);
     const [roleList, setRoleList] = useState([]);
@@ -81,15 +81,17 @@ export default function Role({
         setCurrentRow(null);
         setIsFormVisible(false);
         setLoading(false);
+
         async function getRoleList() {
             try {
                 const result = await roleListAPI();
-                const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
+                const list = result.data.map((item, index) => ({...item, key: index + 1}));
                 setRoleList(list);
             } catch (error) {
                 console.log('getUserList is error: ', error.message);
             }
         }
+
         getRoleList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading, user]);
@@ -105,7 +107,6 @@ export default function Role({
 
     return (
         <>
-            <BannerSection color="#fff" title="Role Management"/>
             <div className='role-wrap'>
                 <h3 className='common-title'>Role List</h3>
                 <Button type="primary" size='large' onClick={() => showModal(null)}>Add</Button>
@@ -115,8 +116,9 @@ export default function Role({
                     setIsFormVisible={setIsFormVisible}
                     currentRow={currentRow}
                 />
-                <Table columns={columns} dataSource={roleList} />
+                <Table columns={columns} dataSource={roleList}/>
             </div>
         </>
     );
 }
+export default Role;

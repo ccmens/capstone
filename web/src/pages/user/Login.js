@@ -1,10 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-import React from 'react'
-import { Formik, Form } from 'formik'
-import { Button } from 'react-bootstrap'
-import { TextField } from '@components/TextField'
-import * as Yup from 'yup'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import {Formik, Form} from 'formik';
+import {Button} from 'react-bootstrap';
+import {TextField} from '@components/TextField';
+import * as Yup from 'yup';
 
 function Login(props) {
     const validate = Yup.object({
