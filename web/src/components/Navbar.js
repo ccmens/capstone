@@ -134,7 +134,7 @@ const Navbar = ({ user, handleLogout }) => {
                 <div className="navbar">
                     <div className='menu'>
                         <div className="flex-item">
-                            <NavLink to="/"><img src="/images/logo.jpg" width={100} /></NavLink>
+                            <NavLink to="/"><img src="/images/logo.jpg" width={85} /></NavLink>
                             <NavLink className="home" to="/"></NavLink>
                         </div>
                         {!user && (

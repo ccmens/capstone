@@ -1,5 +1,5 @@
 footer {
-  background-color: #111;
+  background-color: black;
   color: #ffffff;
   padding: 3rem 3rem;
 
@@ -11,14 +11,28 @@ a {
   color: #ffffff;
 }
 
-.footer-text {
-}
-
-.footer-nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer-nav > * {
+.footer-nav>* {
   margin: 0 3rem;
+}
+
+.footer-one {
+  width: 25%;
+  float: left;
+  text-align: center;
+}
+
+.footer-two {
+  width: 25%;
+  float: left;
+}
+
+.footer-three {
+  width: 25%;
+  float: left;
+}
+
+.footer-four {
+  width: 25%;
+  float: left;
+  text-align: center;
 }
