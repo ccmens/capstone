@@ -1,13 +1,38 @@
 footer {
-    font-size: 20px;
-    background-color: #333;
-    color: #fff;
-    
+  background-color: black;
+  color: #ffffff;
+  padding: 3rem 3rem;
+
+  width: 100%;
+  display: flex;
 }
 
-.footer {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+a {
+  color: #ffffff;
+}
+
+.footer-nav>* {
+  margin: 0 3rem;
+}
+
+.footer-one {
+  width: 25%;
+  float: left;
+  text-align: center;
+}
+
+.footer-two {
+  width: 25%;
+  float: left;
+}
+
+.footer-three {
+  width: 25%;
+  float: left;
+}
+
+.footer-four {
+  width: 25%;
+  float: left;
+  text-align: center;
 }

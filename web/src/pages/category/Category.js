@@ -1,6 +1,6 @@
 import './Category.css';
-import { Table, Button, Space, message } from 'antd';
-import React, { useState, useEffect } from 'react';
+import {Table, Button, Space, message} from 'antd';
+import React, {useState, useEffect} from 'react';
 import {
     categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete
 } from '@services/api.service';
@@ -8,6 +8,8 @@ import CategoryForm from './components/CategoryForm';
 import BannerSection from '@components/BannerSection';
 // import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
+import AdminManageBar from "../../components/AdminManageBar";
+import UserManageBar from "../../components/UserManageBar";
 
 async function HandleAction(action, id, params) {
     try {
@@ -28,9 +30,7 @@ async function HandleAction(action, id, params) {
     }
 }
 
-export default function Category({
-    user
-}) {
+const Category = ({user}) => {
 
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
@@ -44,12 +44,20 @@ export default function Category({
 
     const columns = [
         // {
-        //     title: 'Id',
-        //     dataIndex: '_id',
-        // },
+         // title: 'Id',
+         // dataIndex: '_id',
+         //},
         {
             title: 'Products Name',
             dataIndex: 'category_name',
+        },
+        {
+            title: 'Product Stock',
+            dataIndex: 'category_qty',
+        },
+        {
+            title: 'Product Price',
+            dataIndex: 'category_price',
         },
         {
             title: 'Create At',
@@ -81,15 +89,17 @@ export default function Category({
         setCurrentRow(null);
         setIsFormVisible(false);
         setLoading(false);
+
         async function getCategoryList() {
             try {
                 const result = await categoryListAPI();
-                const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
+                const list = result.data.map((item, index) => ({...item, key: index + 1}));
                 setCategoryList(list);
             } catch (error) {
                 console.log('getUserList is error: ', error.message);
             }
         }
+
         getCategoryList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading, user]);
@@ -105,9 +115,9 @@ export default function Category({
 
     return (
         <>
-            <BannerSection color="#fff" title="Products Management" />
             <div className='category-wrap'>
                 <h3 className='common-title'>Products List</h3>
+
                 <Button type="primary" size='large' onClick={() => showModal(null)}>Add</Button>
                 <CategoryForm
                     handleSubmit={handleSubmit}
@@ -115,8 +125,9 @@ export default function Category({
                     setIsFormVisible={setIsFormVisible}
                     currentRow={currentRow}
                 />
-                <Table columns={columns} dataSource={categoryList} />
+                <Table columns={columns} dataSource={categoryList}/>
             </div>
         </>
     );
 }
+export default Category;

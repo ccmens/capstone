@@ -71,7 +71,7 @@ export default function ItemReportForm({
   return (
     <Modal
       title="Create Item Report"
-      footer={null}
+        footer={null}
       visible={isReportVisible}
       onCancel={() => setIsReportVisible(false)}
     >

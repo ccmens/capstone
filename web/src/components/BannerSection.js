@@ -13,7 +13,7 @@ export default function BannerSection ({color,title, subTitle})
                 textAlign: 'center'
                 }}>
 
-                <div className="banner-section" style={{minHeight: '350px'}}>
+                <div className="banner-section" style={{minHeight: '500px'}}>
                     <div className="text-center justify-content-center align-self-center">
                         <h1 style={{color: color}}>{title}</h1>
                         <h5>{subTitle}</h5>

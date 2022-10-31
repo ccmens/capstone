@@ -1,57 +1,49 @@
 @import '~antd/dist/antd.css';
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee');
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body {
-  font-family: "Raleway", sans-serif;
-  font-size: 16px;
-  background-color: #f5f5f5;
+body, html {
+    font-family: "ABeeZee", sans-serif;
+    font-size: 16px;
+    background-color: #f6f6f6;
+    height: 100%;
 }
+
 
 li {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  text-decoration: none;
-  color: #000;
+    text-decoration: none;
+    color: #000;
 }
 
 label {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 main {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
-.common-button {
-  width: 100%;
-  max-width: 200px;
-  padding: 0.6rem 1rem;
-  background-color: #d92626;
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
-  border: #d92626 2px solid;
-}
-
-.common-button:hover {
-  background-color: #fff;
-  color: #000;
-}
 
 .ant-table-thead tr th {
-  background-color: #333;
-  color: #fff;
-  font-size: 18px;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
 }
 
 .common-title {
-  font-size: 1.5em;
-  font-weight: bold;
+    font-size: 1.5em;
+    font-weight: bold;
 }
+
+button {
+    border-radius: 4rem !important;
+  }
