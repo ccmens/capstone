@@ -12,8 +12,9 @@ export default function Footer() {
             <div className="footer-three">
             </div>
             <div className="footer-four">
+                <a href="https://www.instagram.com/var.osc/"><img src="/images/logo.jpg" width={40} /></a>
                 <a href="https://www.etsy.com/shop/VariableOscillations"><img src="/images/etsy.jpg" width={70} /></a>
-                <a href="https://www.instagram.com/var.osc/"><img src="/images/insta.png" width={40} /></a>
+                <a href="https://www.instagram.com/var.osc/"><img src="/images/insta.png" width={35} /></a>
             </div>
         </footer>
     )
