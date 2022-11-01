@@ -16,6 +16,7 @@ const CategoryForm = ({
                 category_name: currentRow?.category_name,
                 category_qty: currentRow?.category_qty,
                 category_price: currentRow?.category_price,
+                category_hrs: currentRow?.category_hrs,
             });
         }
     }, [formRef, currentRow]);
@@ -55,7 +56,15 @@ const CategoryForm = ({
                 <Form.Item
                     label="Product Price"
                     name="category_price"
-                    rules={[{ required: true, message: 'Please enter product stock amount!' }]}
+                    rules={[{ required: true, message: 'Please enter product product price!' }]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Build Hours"
+                    name="category_hrs"
+                    rules={[{ required: true, message: 'Please enter product building hours!' }]}
                 >
                     <Input />
                 </Form.Item>

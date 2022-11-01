@@ -1,5 +1,7 @@
+
 import './Category.css';
 import {Table, Button, Space, message} from 'antd';
+
 import React, {useState, useEffect} from 'react';
 import {
     categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete
@@ -56,8 +58,12 @@ const Category = ({user}) => {
             dataIndex: 'category_qty',
         },
         {
-            title: 'Product Price',
+            title: 'Product Price ($cad)',
             dataIndex: 'category_price',
+        },
+        {
+            title: 'Build Hours (hrs)',
+            dataIndex: 'category_hrs',
         },
         {
             title: 'Create At',
@@ -82,6 +88,40 @@ const Category = ({user}) => {
         }
     ];
 
+    const expandedRowRender = ()  => {
+        const columns = [
+            // {
+            //   title: 'Id',
+            //   dataIndex: '_id',
+            // },
+           
+            {
+                title: 'Item Name',
+                dataIndex: 'item_name',
+            },
+    
+            {
+                title: 'Price',
+                dataIndex: 'price',
+            },
+            {
+                title: 'User Name',
+                dataIndex: 'owner',
+                render: (_, row) => row.owner?.email,
+            },
+            {
+                title: 'Create At',
+                dataIndex: 'created_at',
+                render: (text) => moment(text).format('YYYY-MM-DD HH:mm')
+            }
+        ]; 
+        const data =[];
+         
+        return (
+          <Table columns={columns} dataSource={data} pagination={false} />
+        );
+      };
+
     useEffect(() => {
         if (!loading || !user) {
             return;
@@ -96,7 +136,7 @@ const Category = ({user}) => {
                 const list = result.data.map((item, index) => ({...item, key: index + 1}));
                 setCategoryList(list);
             } catch (error) {
-                console.log('getUserList is error: ', error.message);
+                console.log('getCategorylist is error: ', error.message);
             }
         }
 
@@ -125,9 +165,14 @@ const Category = ({user}) => {
                     setIsFormVisible={setIsFormVisible}
                     currentRow={currentRow}
                 />
-                <Table columns={columns} dataSource={categoryList}/>
+                
+                <Table columns={columns} 
+                dataSource={categoryList}/>
+                
             </div>
         </>
     );
 }
 export default Category;
+
+
