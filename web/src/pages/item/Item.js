@@ -222,7 +222,7 @@ const ItemList = ({user}) => {
                         <Col>
                             Search Item By Name:
                             <Input value={search} size='large' onChange={(e) => setSearch(e.target.value)}
-                                   placeholder="Enter item name" style={{width: 200, marginLeft: '1rem', marginRight: '1rem'}}/>
+                                   placeholder="Enter item name" style={{width: 200, marginLeft: '1rem', marginRight: '1rem'}} />
                             <BUTTON size='large' onClick={() => setSearch('')}>Clear</BUTTON>
                         </Col>
                     </Row>
