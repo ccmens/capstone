@@ -1,14 +1,14 @@
-import {Modal, Form, Input, Button, Select, message, Upload} from "antd";
-import React, {useState, useEffect} from "react";
-import {itemUpload} from '@services/api.service';
+import { Modal, Form, Input, Button, Select, message, Upload } from "antd";
+import React, { useState, useEffect } from "react";
+import { itemUpload } from '@services/api.service';
 
 const ItemForm = ({
-                      handleSubmit,
-                      currentRow,
-                      isFormVisible,
-                      setIsFormVisible,
-                      categoryList,
-                  }) => {
+    handleSubmit,
+    currentRow,
+    isFormVisible,
+    setIsFormVisible,
+    categoryList,
+}) => {
     const [formRef, setFormRef] = useState(null);
     const [fileList, setFileList] = useState([]);
 
@@ -82,8 +82,8 @@ const ItemForm = ({
         >
             <Form
                 name="item form"
-                labelCol={{span: 8}}
-                wrapperCol={{span: 12}}
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 12 }}
                 onFinish={(values) => {
                     let picture = {};
                     if (fileList.length > 0) {
@@ -114,15 +114,15 @@ const ItemForm = ({
                 <Form.Item
                     label="Item Name"
                     name="item_name"
-                    rules={[{required: true, message: "Please enter item name!"}]}
+                    rules={[{ required: true, message: "Please enter item name!" }]}
                 >
-                    <Input/>
+                    <Input />
                 </Form.Item>
 
                 <Form.Item
                     label="Product"
                     name="category"
-                    rules={[{required: true, message: "Please select a product!"}]}
+                    rules={[{ required: true, message: "Please select a product!" }]}
                 >
                     <Select
                         options={categoryList.map((item) => ({
@@ -135,14 +135,36 @@ const ItemForm = ({
                 <Form.Item
                     label="Price"
                     name="price"
-                    rules={[{required: true, message: "Please enter price!"}]}
+                    rules={[{ required: true, message: "Please enter price!" }]}
                 >
-                    <Input type="number"/>
+                    <Input type="number" />
+                </Form.Item>
+
+                <Form.Item
+                    label="Stock"
+                    name="stock"
+                    rules={[{ required: true, message: "Please enter Stock!" }]}
+                >
+                    <Input type="number" />
+                </Form.Item>
+
+                <Form.Item
+                    label="Digikey Part #"
+                    name="digikey_part_num"
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Supplier Link"
+                    name="supplier_link"
+                >
+                    <Input />
                 </Form.Item>
 
                 <Form.Item
                     label="Picture"
-                    // name="image"
+                // name="image"
                 >
                     <Upload
                         title="Upload Picture"

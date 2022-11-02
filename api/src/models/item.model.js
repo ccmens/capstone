@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
     price: { type: Number },
     stock: { type: Number },
-    digikey_part_num: { type: Number },
+    digikey_part_num: { type: String },
     supplier_link: { type: String },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
     deleted: { type: Boolean, default: false },
