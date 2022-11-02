@@ -4,10 +4,10 @@ import {Table, Button, Space, message} from 'antd';
 
 import React, {useState, useEffect} from 'react';
 import {
-    categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete
+    categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete,
+    itemList as itemListAPI
 } from '@services/api.service';
 import CategoryForm from './components/CategoryForm';
-import BannerSection from '@components/BannerSection';
 // import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
 import AdminManageBar from "../../components/AdminManageBar";
@@ -32,10 +32,12 @@ async function HandleAction(action, id, params) {
     }
 }
 
+
 const Category = ({user}) => {
 
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
+    const [itemList, setItemList] = useState([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [currentRow, setCurrentRow] = useState(null);
 
@@ -88,39 +90,6 @@ const Category = ({user}) => {
         }
     ];
 
-    const expandedRowRender = ()  => {
-        const columns = [
-            // {
-            //   title: 'Id',
-            //   dataIndex: '_id',
-            // },
-           
-            {
-                title: 'Item Name',
-                dataIndex: 'item_name',
-            },
-    
-            {
-                title: 'Price',
-                dataIndex: 'price',
-            },
-            {
-                title: 'User Name',
-                dataIndex: 'owner',
-                render: (_, row) => row.owner?.email,
-            },
-            {
-                title: 'Create At',
-                dataIndex: 'created_at',
-                render: (text) => moment(text).format('YYYY-MM-DD HH:mm')
-            }
-        ]; 
-        const data =[];
-         
-        return (
-          <Table columns={columns} dataSource={data} pagination={false} />
-        );
-      };
 
     useEffect(() => {
         if (!loading || !user) {
@@ -142,6 +111,18 @@ const Category = ({user}) => {
 
         getCategoryList();
         // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        async function getItemList() {
+            try {
+                const result =  await itemListAPI();
+                setItemList(result.data);
+            } catch (error) {
+                console.log("getPartList is error: ", error.message);
+            }
+        }
+
+        getItemList();
+
     }, [loading, user]);
 
     const handleSubmit = async (values) => {
@@ -164,6 +145,7 @@ const Category = ({user}) => {
                     isFormVisible={isFormVisible}
                     setIsFormVisible={setIsFormVisible}
                     currentRow={currentRow}
+                    itemList={itemList}
                 />
                 
                 <Table columns={columns} 

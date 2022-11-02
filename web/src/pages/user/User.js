@@ -6,7 +6,6 @@ import {
     roleList as roleListAPI, userExport
 } from '@services/api.service';
 import UserForm from './components/UserForm';
-import BannerSection from '@components/BannerSection';
 import ConfirmComponent from '@components/ConfirmComponent';
 import ExportButton from '@components/ExportButton';
 import {ExportToCsv} from '@components/ExportUtils';
