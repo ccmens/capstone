@@ -6,6 +6,7 @@ const resize = require('../utils/resize');
 
 const itemController = {};
 
+// uploading a single item to the application
 itemController.upload = async (req, res) => {
   try {
     const id = req.params.id;
@@ -35,6 +36,7 @@ itemController.upload = async (req, res) => {
   }
 }
 
+//populate the itemlist IE: dispaly items.
 itemController.list = async (req, res) => {
   try {
     const where = {};
@@ -62,10 +64,11 @@ itemController.get = async (req, res) => {
   }
 };
 
+// Add items
 itemController.add = async (req, res) => {
   try {
     console.log('add:', req.body)
-    const { item_name, category, price, picture } = req.body;
+    const { item_name, category, price, stock, digikey_part_num, supplier_link, picture } = req.body;
     let fileUrl = '';
     if (picture) {
       const filename = `${picture.uid}.${picture.extname}`;
@@ -75,6 +78,9 @@ itemController.add = async (req, res) => {
       item_name: item_name,
       category: category,
       price: price,
+      stock: stock,
+      digikey_part_num: digikey_part_num,
+      supplier_link: supplier_link,
       owner: res.user._id,
       image: fileUrl,
     });
@@ -144,35 +150,35 @@ itemController.export = async (req, res) => {
     console.log('export:', req.body)
     let results = [];
     //const users = await userModel.find({ active: true }).populate("role");
-   // for (const user of users) {
-      //if (user.role.role_name != "user")
-        //continue;
-      
-      //const items = await itemModel.find();
-      const items = await itemModel.find({deleted : false}).populate("category");
-      for (const item of items){
-       
-       const tmp = {
+    // for (const user of users) {
+    //if (user.role.role_name != "user")
+    //continue;
+
+    //const items = await itemModel.find();
+    const items = await itemModel.find({ deleted: false }).populate("category");
+    for (const item of items) {
+
+      const tmp = {
         Name: item.item_name,
         Product: item.category.category_name,
-        Price:item.price 
+        Price: item.price
       };
 
 
       results.push(tmp);
-  
-    };
-   /* };
 
-    results.sort(function (a, b) {
-      return a.Last.localeCompare(b.Last) || a.First.localeCompare(b.First) || b.Number_Of_Items - a.Number_Of_Items;
-    });
+    };
+    /* };
  
-    results.forEach(item=>{
-      delete item.First;
-      delete item.Last;
-    })
-*/
+     results.sort(function (a, b) {
+       return a.Last.localeCompare(b.Last) || a.First.localeCompare(b.First) || b.Number_Of_Items - a.Number_Of_Items;
+     });
+  
+     results.forEach(item=>{
+       delete item.First;
+       delete item.Last;
+     })
+ */
 
     res.json({
       status: 'success',
