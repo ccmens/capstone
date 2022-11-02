@@ -77,6 +77,9 @@ const CategoryForm = ({
                     rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
                 >
                     <Select
+                        mode="multiple"
+                        allowClear
+                        placeholder="Please select"
                         options={itemList.map((item) => ({
                             value: item._id,
                             label: item.item_name,

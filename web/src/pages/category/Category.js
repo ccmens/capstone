@@ -8,6 +8,7 @@ import {
     itemList as itemListAPI
 } from '@services/api.service';
 import CategoryForm from './components/CategoryForm';
+import BannerSection from '@components/BannerSection';
 // import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
 import AdminManageBar from "../../components/AdminManageBar";
@@ -66,6 +67,11 @@ const Category = ({user}) => {
         {
             title: 'Build Hours (hrs)',
             dataIndex: 'category_hrs',
+        },
+        {
+            title: 'Needed Parts',
+            dataIndex: 'category_part',
+            render: (_, row) => row.item?.item_name,
         },
         {
             title: 'Create At',
