@@ -1,5 +1,5 @@
 const RoleData = {
-    RoleType: ['user', 'admin', 'company'],
+    RoleType: ['user', 'admin'],
 };
 
 export default RoleData;

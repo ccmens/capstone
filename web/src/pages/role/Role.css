@@ -13,10 +13,26 @@
 }
 
 .role-wrap h3 {
-    text-align: center;
+    
     margin-bottom: 10px;
+}
+.ant-table-tbody td,
+.ant-table-thead th {
+    text-align: center;
 }
 
 .role-wrap button {
     margin-bottom: 10px;
+}
+
+.ant-modal-header{
+    background: #000;
+}
+
+.ant-modal-title {
+    color: #fff !important;
+}
+
+.anticon svg {
+    color:#fff;
 }
