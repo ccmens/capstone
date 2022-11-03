@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Button,Select } from 'antd';
+import { Modal, Form, Input, Button,Select, InputNumber } from 'antd';
 import React from 'react';
 
 const CategoryForm = ({
@@ -77,15 +77,14 @@ const CategoryForm = ({
                     rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
                 >
                     <Select
-                        mode="multiple"
-                        allowClear
                         placeholder="Please select"
+                        width="50%"
                         options={itemList.map((item) => ({
                             value: item._id,
                             label: item.item_name,
                         }))}
                     />
-                    
+                   
                 </Form.Item>
 
 

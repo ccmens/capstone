@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Button, Select, message, Upload } from "antd";
+import { Modal, Form, Input, Button, Select, message, Upload, InputNumber } from "antd";
 import React, { useState, useEffect } from "react";
 import { itemUpload } from '@services/api.service';
 
@@ -32,6 +32,8 @@ const ItemForm = ({
                 item_name: currentRow?.item_name,
                 category: currentRow?.category?._id || categoryList[0]?._id,
                 price: currentRow?.price,
+                stock: currentRow?.stock,
+                needed_qty: currentRow?.needed_qty,
             });
             setFileList(getPicture(currentRow?.image || ''));
         }
@@ -138,6 +140,13 @@ const ItemForm = ({
                     rules={[{ required: true, message: "Please enter price!" }]}
                 >
                     <Input type="number" />
+                </Form.Item>
+                <Form.Item
+                    label="Needed QTY"
+                    name="needed_qty"
+                    rules={[{ required: true, message: "Please enter price!" }]}
+                >
+                    <InputNumber />
                 </Form.Item>
 
                 <Form.Item

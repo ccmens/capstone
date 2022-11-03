@@ -98,18 +98,21 @@ const ItemList = ({user}) => {
         },
 
         {
-            title: 'Products',
+            title: 'Product',
             dataIndex: 'category',
             render: (_, row) => row.category?.category_name,
+        },
+        {
+            title: 'Needed Qty',
+            dataIndex: 'needed_qty',
         },
         {
             title: 'Price',
             dataIndex: 'price',
         },
         {
-            title: 'User Name',
-            dataIndex: 'owner',
-            render: (_, row) => row.owner?.email,
+            title: 'Stock',
+            dataIndex: 'stock',
         },
         {
             title: 'Create At',

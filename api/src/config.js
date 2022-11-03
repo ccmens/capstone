@@ -1,7 +1,7 @@
 const config = {
     server_host: 'localhost',
     server_port: 4000,
-    database_url: 'mongodb+srv://VO_User2:RwH.bXD7bv6-aQA@voinventorycluster.dglj9c2.mongodb.net/?retryWrites=true&w=majority',
+    database_url: 'mongodb+srv://VO_User1:1vcafgpyZp08diEh@voinventorycluster.dglj9c2.mongodb.net/?retryWrites=true&w=majority',
     prefix: '/api',
     verion: '1.0',
     http_url: 'http://localhost:4000',

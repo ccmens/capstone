@@ -1,7 +1,7 @@
 
 import './Category.css';
 import {Table, Button, Space, message} from 'antd';
-
+import styled from "styled-components";
 import React, {useState, useEffect} from 'react';
 import {
     categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete,
@@ -9,7 +9,7 @@ import {
 } from '@services/api.service';
 import CategoryForm from './components/CategoryForm';
 import BannerSection from '@components/BannerSection';
-// import ConfirmComponent from '@components/ConfirmComponent';
+import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
 import AdminManageBar from "../../components/AdminManageBar";
 import UserManageBar from "../../components/UserManageBar";
@@ -38,9 +38,16 @@ const Category = ({user}) => {
 
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
+    const [tableList, setTableList] = useState([]);
     const [itemList, setItemList] = useState([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [currentRow, setCurrentRow] = useState(null);
+
+    const BUTTON = styled(Button)`
+    border-radius: 20px;
+  width: 75px;
+  height: 40px;
+`
 
     const showModal = (row) => {
         setCurrentRow(row);
@@ -48,13 +55,11 @@ const Category = ({user}) => {
     };
 
     const columns = [
-        // {
-         // title: 'Id',
-         // dataIndex: '_id',
-         //},
+       
         {
             title: 'Products Name',
             dataIndex: 'category_name',
+
         },
         {
             title: 'Product Stock',
@@ -69,11 +74,6 @@ const Category = ({user}) => {
             dataIndex: 'category_hrs',
         },
         {
-            title: 'Needed Parts',
-            dataIndex: 'category_part',
-            render: (_, row) => row.item?.item_name,
-        },
-        {
             title: 'Create At',
             dataIndex: 'created_at',
             render: (text) => moment(text).format('YYYY-MM-DD HH:mm')
@@ -84,18 +84,41 @@ const Category = ({user}) => {
             render: (_, row) => (
                 <Space size="middle">
                     <Button onClick={() => showModal(row)}>Edit</Button>
-                    <Button type="danger" onClick={() =>
-                        // ConfirmComponent(async () => {
-                        //     await HandleAction('delete', row._id, null);
-                        //     setLoading(true);
-                        // })
-                        message.error('Product cannot delete')
-                    }>Delete</Button>
+                    <BUTTON
+                        type="danger"
+                        onClick={() =>
+                            ConfirmComponent(async () => {
+                                await HandleAction("delete", row._id, null);
+                                setLoading(true);
+                            })
+                        }
+                    >
+                        {row.deleted ? 'Delete Permanently' : 'Delete'}
+                    </BUTTON>
                 </Space>
             ),
         }
     ];
 
+    const expandedRowRender = () => {
+        const columns = [
+          {
+            title: 'Part Name',
+            dataIndex: 'item_name',
+          },
+          {
+            title: 'Needed QTY',
+            dataIndex: 'needed_qty',
+          },
+          {
+            title: 'Unit Price',
+            dataIndex: 'price',
+          },
+        ];
+  
+    return <Table columns={columns} dataSource={itemList} pagination={false} />;
+  };
+    
 
     useEffect(() => {
         if (!loading || !user) {
@@ -108,6 +131,7 @@ const Category = ({user}) => {
         async function getCategoryList() {
             try {
                 const result = await categoryListAPI();
+                
                 const list = result.data.map((item, index) => ({...item, key: index + 1}));
                 setCategoryList(list);
             } catch (error) {
@@ -133,6 +157,7 @@ const Category = ({user}) => {
 
     const handleSubmit = async (values) => {
         const result = currentRow ? await HandleAction('update', currentRow._id, values) : await HandleAction('add', null, values);
+       
         if (result) {
             setLoading(true);
         } else {
@@ -154,7 +179,12 @@ const Category = ({user}) => {
                     itemList={itemList}
                 />
                 
-                <Table columns={columns} 
+                <Table 
+                columns={columns} 
+                 expandable={{
+                    expandedRowRender,
+                    defaultExpandedRowKeys: ['0'],
+                  }}
                 dataSource={categoryList}/>
                 
             </div>
