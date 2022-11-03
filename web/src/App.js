@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginV2 from './pages/user/LoginV2';
@@ -21,6 +21,11 @@ import RegisterV2 from "./pages/user/RegisterV2";
 import BannerSection from "./components/BannerSection";
 import Item from "./pages/item/Item";
 
+import Icon from "@mui/material/Icon";
+import MDBox from "./components/MDBox";
+
+
+
 function App() {
 
     const navigate = useNavigate();
@@ -32,6 +37,20 @@ function App() {
         setUser(null);
         localStorage.removeItem('userinfo');
     }
+
+    const getRoutes = (allRoutes) =>
+    allRoutes.map((route) => {
+    if (route.collapse) {
+        return getRoutes(route.collapse);
+    }
+
+    if (route.route) {
+        return <Route exact path={route.route} element={route.component} key={route.key} />;
+    }
+
+    return null;
+    });
+
 
     const handleAction = async (action, id, params) => {
         try {

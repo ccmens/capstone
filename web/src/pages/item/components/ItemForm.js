@@ -3,12 +3,12 @@ import React, {useState, useEffect} from "react";
 import {itemUpload} from '@services/api.service';
 
 const ItemForm = ({
-                      handleSubmit,
-                      currentRow,
-                      isFormVisible,
-                      setIsFormVisible,
-                      categoryList,
-                  }) => {
+                    handleSubmit,
+                    currentRow,
+                    isFormVisible,
+                    setIsFormVisible,
+                    categoryList,
+                    }) => {
     const [formRef, setFormRef] = useState(null);
     const [fileList, setFileList] = useState([]);
 
