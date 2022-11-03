@@ -24,12 +24,12 @@ const Home = ({user}) => {
                         <ComplexStatisticsCard
                             color="dark"
                             icon="weekend"
-                            title="Bookings"
+                            title="Products"
                             count={281}
                             percentage={{
                                 color: "success",
-                                amount: "+55%",
-                                label: "than lask week",
+                                amount: "+3",
+                                label: "Added lask week",
                             }}
                         />
                     </MDBox>
@@ -38,12 +38,12 @@ const Home = ({user}) => {
                     <MDBox mb={1.5}>
                         <ComplexStatisticsCard
                             icon="leaderboard"
-                            title="Today's Users"
+                            title="Parts"
                             count="2,300"
                             percentage={{
                                 color: "success",
-                                amount: "+3%",
-                                label: "than last month",
+                                amount: "+3 new",
+                                label: "Added last month",
                             }}
                         />
                     </MDBox>
@@ -53,12 +53,12 @@ const Home = ({user}) => {
                         <ComplexStatisticsCard
                             color="success"
                             icon="store"
-                            title="Revenue"
-                            count="34k"
+                            title="Low in Stock"
+                            count="15"
                             percentage={{
                                 color: "success",
                                 amount: "+1%",
-                                label: "than yesterday",
+                                label: "Updated just now",
                             }}
                         />
                     </MDBox>
@@ -68,7 +68,7 @@ const Home = ({user}) => {
                         <ComplexStatisticsCard
                             color="primary"
                             icon="person_add"
-                            title="Followers"
+                            title="Out of Stock"
                             count="+91"
                             percentage={{
                                 color: "success",

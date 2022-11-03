@@ -140,7 +140,7 @@ function App() {
             <Navbar user={user} handleLogout={handleLogout}/>
             <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white'/>
             <Routes>
-                <Route path="/" element={<Home user={user}/>}/>
+                <Route path="/home" element={<Home user={user}/>}/>
                 <Route path="/items" element={<Item user={user}/>}/>
                 <Route path="/login" element={<LoginV2 handleAction={handleAction}/>}/>
                 <Route path="/register" element={<RegisterV2 handleAction={handleAction}/>}/>
