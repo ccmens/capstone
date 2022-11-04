@@ -70,7 +70,7 @@ const ItemList = ({ user }) => {
       height: 40px;
     `
 
-    const EXPORTBUTTON = styled(Button)`
+    const ExportButton = styled(Button)`
         border-radius: 20px;
       width: 150px;
       height: 40px;
@@ -221,7 +221,7 @@ const ItemList = ({ user }) => {
                     <Row>
                         <Space>
                             <BUTTON type="primary" size='large' onClick={() => showModal(null)}>Add</BUTTON>
-                            <EXPORTBUTTON onExport={async () => {
+                            <ExportButton onExport={async () => {
                                 const result = await HandleAction('export', null, null);
                                 if (result) {
                                     ExportToCsv(result.data, 'item-export.csv');
@@ -230,7 +230,7 @@ const ItemList = ({ user }) => {
                                 }
                             }}>
                                 Export to CSV
-                            </EXPORTBUTTON>
+                            </ExportButton>
                         </Space>
                     </Row>
                     <Row>
