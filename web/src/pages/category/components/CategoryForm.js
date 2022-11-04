@@ -14,8 +14,6 @@ const CategoryForm = ({
         if (formRef) {
             formRef.setFieldsValue({
                 category_name: currentRow?.category_name,
-                category_qty: currentRow?.category_qty,
-                category_price: currentRow?.category_price,
             });
         }
     }, [formRef, currentRow]);
@@ -43,23 +41,6 @@ const CategoryForm = ({
                 >
                     <Input />
                 </Form.Item>
-
-                <Form.Item
-                    label="Product Stock"
-                    name="category_qty"
-                    rules={[{ required: true, message: 'Please enter product stock amount!' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
-                    label="Product Price"
-                    name="category_price"
-                    rules={[{ required: true, message: 'Please enter product stock amount!' }]}
-                >
-                    <Input />
-                </Form.Item>
-
 
                 <Form.Item
                     wrapperCol={{

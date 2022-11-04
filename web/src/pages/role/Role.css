@@ -1,7 +1,7 @@
 /* @import '~antd/dist/antd.css'; */
 
 .ant-table-thead tr th {
-    background-color: #000;
+    background-color: #333;
     color: #fff;
     font-size: 18px;
 }

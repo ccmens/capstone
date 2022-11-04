@@ -1,10 +1,12 @@
-import './AdminManageBar.css'
-import {NavLink} from 'react-router-dom'
+import './ManageBar.css'
+import { NavLink } from 'react-router-dom'
 import React from 'react'
-import {Button} from 'antd'
+import { Button } from 'antd'
+export default function UserManageBar({
+    handleLogout
+}) {
 
-const UserManageBar = () => {
-    const NavActive = ({isActive}) => {
+    const NavActive = ({ isActive }) => {
         return isActive ? 'manage-menu-item active' : 'manage-menu-item';
     }
 
@@ -12,7 +14,7 @@ const UserManageBar = () => {
         <div className='manage-bar'>
             <NavLink className={NavActive} to='/profile'>Profile</NavLink>
             <NavLink className={NavActive} to='/items'>Parts Management</NavLink>
+            <Button onClick={handleLogout}>Logout</Button>
         </div>
     )
 }
-export default UserManageBar;

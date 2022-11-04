@@ -1,12 +1,12 @@
 import React from "react";
+import BannerSection from '@components/BannerSection'
 import './Home.css'
 
-const Home = ({user}) => {
+function Home() {
 
     return (
         <>
-            {/*{user && user.role?.role_name === 'admin' && <AdminManageBar user={user}/>}*/}
-            {/*{user && user.role?.role_name === 'user' && <UserManageBar user={user}/>}*/}
+           <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white'/>
         </>
     )
 }
