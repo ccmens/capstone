@@ -150,23 +150,17 @@ const ItemList = ({ user }) => {
         }
 
     ];
+
     const expandedRowRender = () => {
         const columns = [
             {
-                title: 'Product Name',
-                dataIndex: 'product_name',
+                title: 'Part Name',
+                dataIndex: 'category_name',
             },
-            {
-                title: 'Needed QTY',
-                dataIndex: 'needed_qty',
-            },
-            // {
-            //     title: 'Unit Price',
-            //     dataIndex: 'price',
-            // },
+
         ];
 
-        return <Table columns={columns} dataSource={categoryList.part_category} pagination={false} />;
+        return <Table columns={columns} dataSource={categoryList} pagination={false} />;
     };
 
     useEffect(() => {
