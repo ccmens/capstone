@@ -68,7 +68,7 @@ itemController.get = async (req, res) => {
 itemController.add = async (req, res) => {
   try {
     console.log('add:', req.body)
-    const { item_name, category, price, stock, digikey_part_num, supplier_link, picture ,needed_qty} = req.body;
+    const { item_name, category, id, category_item_name, price, stock, digikey_part_num, supplier_link, picture, needed_qty } = req.body;
     let fileUrl = '';
     if (picture) {
       const filename = `${picture.uid}.${picture.extname}`;
@@ -77,9 +77,10 @@ itemController.add = async (req, res) => {
     const item = new itemModel({
       item_name: item_name,
       category: category,
+      part_category: [id, category_item_name],
       price: price,
       stock: stock,
-      needed_qty:needed_qty,
+      needed_qty: needed_qty,
       digikey_part_num: digikey_part_num,
       supplier_link: supplier_link,
       owner: res.user._id,
@@ -96,12 +97,13 @@ itemController.add = async (req, res) => {
 
 itemController.update = async (req, res) => {
   try {
-    const { item_name, category, price, picture,stock,digikey_part_num, supplier_link,needed_qty } = req.body;
+    const { item_name, category, price, picture, stock, digikey_part_num, supplier_link, needed_qty, part_category } = req.body;
     if (item_name) res.item.item_name = item_name;
     if (category) res.item.category = category;
+    if (part_category) res.item.part_category = part_category;
     if (price) res.item.price = price;
     if (stock) res.item.stock = stock;
-    if(needed_qty)res.item.needed_qty=needed_qty;
+    if (needed_qty) res.item.needed_qty = needed_qty;
     if (digikey_part_num) res.item.digikey_part_num = digikey_part_num;
     if (supplier_link) res.item.supplier_link = supplier_link;
     if (picture) {
@@ -167,7 +169,7 @@ itemController.export = async (req, res) => {
         Name: item.item_name,
         Product: item.category.category_name,
         Price: item.price,
-        Stock:item.stock
+        Stock: item.stock
       };
 
 

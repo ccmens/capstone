@@ -1,6 +1,6 @@
 import "./Item.css";
-import {Button, Col, Input, message, Row, Space, Table} from "antd";
-import React, {useEffect, useState} from "react";
+import { Button, Col, Input, message, Row, Space, Table } from "antd";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
     categoryList as categoryListAPI,
@@ -14,7 +14,7 @@ import {
 import ItemForm from "./components/ItemForm";
 import ConfirmComponent from "@components/ConfirmComponent";
 import ExportButton from '@components/ExportButton';
-import {ExportToCsv} from '@components/ExportUtils';
+import { ExportToCsv } from '@components/ExportUtils';
 import moment from "moment";
 
 async function HandleAction(action, id, params) {
@@ -49,14 +49,14 @@ async function HandleAction(action, id, params) {
         return result;
     } catch (error) {
         const text = `handle action is error: ${error?.data?.message || "please try again"
-        }`;
+            }`;
         console.log(text);
         message.error(text);
         return null;
     }
 }
 
-const ItemList = ({user}) => {
+const ItemList = ({ user }) => {
     const [loading, setLoading] = useState(true);
     const [itemList, setItemList] = useState([]);
     const [tableList, setTableList] = useState([]);
@@ -90,22 +90,23 @@ const ItemList = ({user}) => {
             title: 'Picture',
             dataIndex: 'image',
             render: (_, row) => <img alt={row.name} width={200} height={200}
-                                     src={row.image || '/images/default-item.png'}/>,
+                src={row.image || '/images/default-item.png'} />,
         },
         {
             title: 'Item Name',
             dataIndex: 'item_name',
         },
 
-        {
-            title: 'Product',
-            dataIndex: 'category',
-            render: (_, row) => row.category?.category_name,
-        },
-        {
-            title: 'Needed Qty',
-            dataIndex: 'needed_qty',
-        },
+        // {
+        //     title: 'Product',
+        //     dataIndex: 'category',
+        //     render: (_, row) => row.category?.category_name,
+        // },
+        // {
+        //     title: 'Needed Qty',
+        //     dataIndex: 'needed_qty',
+        // },
+
         {
             title: 'Price',
             dataIndex: 'price',
@@ -137,19 +138,36 @@ const ItemList = ({user}) => {
                         {row.deleted ? 'Delete Permanently' : 'Delete'}
                     </BUTTON>
                     {row.deleted && (<Button type='primary'
-                                             onClick={() =>
-                                                 ConfirmComponent(async () => {
-                                                     await HandleAction("recover", row._id, null);
-                                                     setLoading(true);
-                                                 }, 'Are you sure to recover this item?')
-                                             }
+                        onClick={() =>
+                            ConfirmComponent(async () => {
+                                await HandleAction("recover", row._id, null);
+                                setLoading(true);
+                            }, 'Are you sure to recover this item?')
+                        }
                     >Recover</Button>)}
                 </Space>
             ),
         }
 
     ];
+    const expandedRowRender = () => {
+        const columns = [
+            {
+                title: 'Product Name',
+                dataIndex: 'product_name',
+            },
+            {
+                title: 'Needed QTY',
+                dataIndex: 'needed_qty',
+            },
+            // {
+            //     title: 'Unit Price',
+            //     dataIndex: 'price',
+            // },
+        ];
 
+        return <Table columns={columns} dataSource={categoryList.part_category} pagination={false} />;
+    };
 
     useEffect(() => {
         if (!loading || !user) {
@@ -163,7 +181,7 @@ const ItemList = ({user}) => {
 
             const result = await HandleAction('item-list');
             if (result) {
-                const lists = result.data.map((item, index) => ({...item, key: index + 1}));
+                const lists = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setItemList(lists);
                 setTableList(lists);
             }
@@ -225,13 +243,18 @@ const ItemList = ({user}) => {
                         <Col>
                             Search Item By Name:
                             <Input value={search} size='large' onChange={(e) => setSearch(e.target.value)}
-                                   placeholder="Enter item name" style={{width: 200, marginLeft: '1rem', marginRight: '1rem'}} />
+                                placeholder="Enter item name" style={{ width: 200, marginLeft: '1rem', marginRight: '1rem' }} />
                             <BUTTON size='large' onClick={() => setSearch('')}>Clear</BUTTON>
                         </Col>
                     </Row>
-                    
+
                 </div >
-                <Table style={{marginTop: '10px'}} columns={columns} dataSource={tableList}/>
+                <Table
+                    expandable={{
+                        expandedRowRender,
+                        defaultExpandedRowKeys: ['0'],
+                    }}
+                    style={{ marginTop: '10px' }} columns={columns} dataSource={tableList} />
                 <ItemForm
                     handleSubmit={handleSubmit}
                     isFormVisible={isFormVisible}

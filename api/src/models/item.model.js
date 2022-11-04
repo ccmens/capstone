@@ -4,6 +4,10 @@ const mongoose = require('mongoose')
 const itemSchema = new mongoose.Schema({
     item_name: { type: String },
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+    part_category: [{
+        id: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+        category_item_name: { type: String },
+    }],
     price: { type: Number },
     stock: { type: Number },
     needed_qty: { type: Number },

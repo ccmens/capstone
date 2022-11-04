@@ -127,6 +127,7 @@ const ItemForm = ({
                     rules={[{ required: true, message: "Please select a product!" }]}
                 >
                     <Select
+                        mode="multiple"
                         options={categoryList.map((item) => ({
                             value: item._id,
                             label: item.category_name,
