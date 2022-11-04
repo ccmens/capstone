@@ -70,7 +70,7 @@ const ItemList = ({ user }) => {
       height: 40px;
     `
 
-    const ExportButton = styled(Button)`
+    const EXPORTBUTTON = styled(ExportButton)`
         border-radius: 20px;
       width: 150px;
       height: 40px;
