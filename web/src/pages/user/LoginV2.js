@@ -4,6 +4,7 @@ import { Alert, Button, Checkbox, Form, Input, message, Space } from "antd";
 import "./Login.css";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import BannerSection from "../../components/BannerSection";
 
 export default function LoginV2({ handleAction }) {
     const [form] = Form.useForm();
@@ -36,6 +37,7 @@ export default function LoginV2({ handleAction }) {
     `
     return (
         <>
+         <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white' />
             <div className="login-wrap">
                 {/* <h3>Login</h3> */}
                 <div className="login-form">
