@@ -7,7 +7,8 @@
     box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
     font-family: "ABeeZee", sans-serif;
     font-size: 16px;
     background-color: #f6f6f6;
@@ -42,8 +43,9 @@ main {
 .common-title {
     font-size: 1.5em;
     font-weight: bold;
+    text-align: center;
 }
 
 button {
     border-radius: 4rem !important;
-  }
+}
