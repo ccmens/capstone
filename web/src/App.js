@@ -1,11 +1,11 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginV2 from './pages/user/LoginV2';
 
-import { message } from 'antd';
-import { inactive, login, logout, profile, register, tokenLogin as tokenLoginAPI } from '@services/api.service';
+import {message} from 'antd';
+import {inactive, login, logout, profile, register, tokenLogin as tokenLoginAPI} from '@services/api.service';
 import ErrorPage403 from './ErrorPage403';
 import ErrorPage404 from './ErrorPage404';
 import ErrorPage500 from './ErrorPage500';
@@ -18,6 +18,7 @@ import Profile from "./pages/user/Profile";
 import TitleComponent from "./components/TitleComponent";
 import ConfirmComponent from "./components/ConfirmComponent";
 import RegisterV2 from "./pages/user/RegisterV2";
+import BannerSection from "./components/BannerSection";
 import Item from "./pages/item/Item";
 
 function App() {
@@ -94,23 +95,24 @@ function App() {
 
     return (
         <>
-            <TitleComponent user={user} isTokenLogin={isTokenLogin} />
-            <Navbar user={user} handleLogout={handleLogout} />
+            <TitleComponent user={user} isTokenLogin={isTokenLogin}/>
+            <Navbar user={user} handleLogout={handleLogout}/>
+            <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white'/>
             <Routes>
-                <Route path="/" element={<Home user={user} />} />
-                <Route path="/items" element={<Item user={user} />} />
-                <Route path="/login" element={<LoginV2 handleAction={handleAction} />} />
-                <Route path="/register" element={<RegisterV2 handleAction={handleAction} />} />
-                <Route path="/userlist" element={<UserList user={user} />} />
-                <Route path="/category" element={<Category user={user} />} />
-                <Route path="/rolelist" element={<Role user={user} />} />
-                <Route path="/profile" element={<Profile user={user} handleAction={handleAction} />} />
-                <Route path="/error403" element={<ErrorPage403 />} />
-                <Route path="/error404" element={<ErrorPage404 />} />
-                <Route path="/error500" element={<ErrorPage500 />} />
+                <Route path="/" element={<Home user={user}/>}/>
+                <Route path="/items" element={<Item user={user}/>}/>
+                <Route path="/login" element={<LoginV2 handleAction={handleAction}/>}/>
+                <Route path="/register" element={<RegisterV2 handleAction={handleAction}/>}/>
+                <Route path="/userlist" element={<UserList user={user}/>}/>
+                <Route path="/category" element={<Category user={user}/>}/>
+                <Route path="/rolelist" element={<Role user={user}/>}/>
+                <Route path="/profile" element={<Profile user={user} handleAction={handleAction}/>}/>
+                <Route path="/error403" element={<ErrorPage403/>}/>
+                <Route path="/error404" element={<ErrorPage404/>}/>
+                <Route path="/error500" element={<ErrorPage500/>}/>
             </Routes>
 
-            <Footer />
+            <Footer/>
         </>
     );
 }
