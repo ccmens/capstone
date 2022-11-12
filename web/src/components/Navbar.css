@@ -3,6 +3,7 @@ nav {
     margin: 0 auto;
     background-color: black;
 }
+
 .navbar {
     margin: 0 70px;
     padding: 10px;
@@ -10,11 +11,14 @@ nav {
     height: 100px;
     justify-content: space-between;
     align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
-.home{
+.home {
     width: 300px;
 }
+
 .menu {
     display: flex;
     flex: 1;
@@ -24,7 +28,8 @@ nav {
 
 
 }
-.flex-item{
+
+.flex-item {
     white-space: nowrap;
 
 }
@@ -36,10 +41,12 @@ nav {
     font-size: 18px;
     color: white;
 }
-.dropdown-menu{
+
+.dropdown-menu {
     display: none;
 }
-.home{
+
+.home {
     cursor: pointer;
     font-weight: bold;
     font-size: 25px;
@@ -48,10 +55,12 @@ nav {
     margin-left: 10px;
     margin-top: 30px;
 }
-.btn:hover{
+
+.btn:hover {
     transition: 0.5s;
     color: #5DA9E9;
 }
+
 .userinfo {
     display: flex;
     justify-content: center;
@@ -59,28 +68,34 @@ nav {
     gap: 20px;
 }
 
-.dropdown{
+.dropdown {
     color: white;
 }
-.drop-menu{
+
+.drop-menu {
     display: none;
 
 }
+
 @media only screen and (max-width: 1000px) {
     .btn {
         display: none;
     }
-    .drop-menu{
+
+    .drop-menu {
         display: block;
         margin-right: 30px;
     }
-    .userinfo{
+
+    .userinfo {
         display: none;
     }
+
     .navbar {
         margin: 0;
     }
-    .bb{
+
+    .bb {
         display: block;
         color: white;
     }

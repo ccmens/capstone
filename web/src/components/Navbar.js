@@ -38,35 +38,17 @@ const Navbar = ({ user, handleLogout }) => {
                 {
                     key: '1',
                     label: (
-                        <Link to='/profile'>Profile</Link>
+                        <Link to='/login'>Login</Link>
                     ),
                     icon: <UserOutlined />
                 },
                 {
                     key: '2',
                     label: (
-                        <Link to='/items'>Parts Management</Link>
+                        <Link to='/register'>Register</Link>
                     ),
                     icon: <LogoutOutlined />,
                 },
-                {
-                    key: '3',
-                    label: (
-                        <Link to='/profile'>
-                            Profile
-                        </Link>
-                    ),
-                    icon: <UserOutlined />
-                },
-                {
-                    key: '4',
-                    label: (
-                        <span onClick={handleLogout}>
-                            Logout
-                        </span>
-                    ),
-                    icon: <LogoutOutlined />,
-                }
 
             ]}
         />
