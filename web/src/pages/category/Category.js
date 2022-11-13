@@ -1,8 +1,8 @@
 
 import './Category.css';
-import {Table, Button, Space, message} from 'antd';
+import { Table, Button, Space, message } from 'antd';
 import styled from "styled-components";
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete,
     itemList as itemListAPI
@@ -34,7 +34,7 @@ async function HandleAction(action, id, params) {
 }
 
 
-const Category = ({user}) => {
+const Category = ({ user }) => {
 
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
@@ -55,11 +55,13 @@ const Category = ({user}) => {
     };
 
     const columns = [
-       
+
         {
             title: 'Products Name',
             dataIndex: 'category_name',
-
+            // render: (_, row) => (
+            //     <p>{getPartItemList(row?.needed_part)}</p>
+            // ),
         },
         {
             title: 'Product Stock',
@@ -101,24 +103,42 @@ const Category = ({user}) => {
     ];
 
 
-        const nestedcolumns = [
-          {
+    const nestedcolumns = [
+        {
             title: 'Part Name',
             dataIndex: 'item_name',
             //render: (_, row) => row.item?.item_name,
-          },
-          /*
-          {
-            title: 'Needed QTY',
-            dataIndex: 'needed_qty',
-          },
-          {
-            title: 'Unit Price',
-            dataIndex: 'price',
-          },
-          */
-        ];
-  
+        },
+        /*
+        {
+          title: 'Needed QTY',
+          dataIndex: 'needed_qty',
+        },
+        {
+          title: 'Unit Price',
+          dataIndex: 'price',
+        },
+        */
+    ];
+
+    const getPartItemList = (ids) => {
+        // console.log('ids=', ids)
+        // return 'aaaa';
+        if (!ids) {
+            return 'item is empty';
+        }
+        let text = '';
+        const list = [];
+        ids.forEach(id => {
+            const item = itemList.find(item => item._id === id);
+            if (item) {
+                list.push(item);
+                text += item.item_name + '<br/>';
+            }
+        });
+        return text;
+    }
+
     console.log(tableList);
 
     useEffect(() => {
@@ -132,12 +152,12 @@ const Category = ({user}) => {
         async function getCategoryList() {
             try {
                 const result = await categoryListAPI();
-                
-                const list = result.data.map((item, index) => ({...item, key: index + 1}));
+
+                const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setCategoryList(list);
                 const nestedList = result.data.map((item, index) => {
                     return {
-                        item:item.needed_part
+                        item: item.needed_part
                     }
                 });
                 setTableList(nestedList);
@@ -151,7 +171,7 @@ const Category = ({user}) => {
 
         async function getItemList() {
             try {
-                const result =  await itemListAPI();
+                const result = await itemListAPI();
                 setItemList(result.data);
             } catch (error) {
                 console.log("getPartList is error: ", error.message);
@@ -164,7 +184,7 @@ const Category = ({user}) => {
 
     const handleSubmit = async (values) => {
         const result = currentRow ? await HandleAction('update', currentRow._id, values) : await HandleAction('add', null, values);
-       
+
         if (result) {
             setLoading(true);
         } else {
@@ -185,17 +205,17 @@ const Category = ({user}) => {
                     currentRow={currentRow}
                     itemList={itemList}
                 />
-                
-                <Table 
-                columns={columns} 
-                 expandable={{
-                    expandedRowRender:(record) => {
-                        return <Table rowKey={record=>record.key} columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
-                 },
-                    defaultExpandedRowKeys: ['0'],
-                  }}
-                dataSource={categoryList}/>
-                
+
+                <Table
+                    columns={columns}
+                    expandable={{
+                        expandedRowRender: (record) => {
+                            return <Table rowKey={record => record.key} columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
+                        },
+                        defaultExpandedRowKeys: ['0'],
+                    }}
+                    dataSource={categoryList} />
+
             </div>
         </>
     );

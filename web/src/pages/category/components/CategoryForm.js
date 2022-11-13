@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Button,Select, InputNumber } from 'antd';
+import { Modal, Form, Input, Button, Select, InputNumber } from 'antd';
 import React from 'react';
 
 const CategoryForm = ({
@@ -18,10 +18,25 @@ const CategoryForm = ({
                 category_qty: currentRow?.category_qty,
                 category_price: currentRow?.category_price,
                 category_hrs: currentRow?.category_hrs,
-                needed_part:currentRow?.needed_part?.item?._id || itemList[0]?._id,
+                // needed_part: currentRow?.needed_part?.item?._id || itemList[0]?._id,
             });
         }
     }, [formRef, currentRow, itemList]);
+
+    const getItemOptions = (ids) => {
+        if (!ids || ids.length === 0) {
+            return [];
+        }
+        const options = [];
+        const findList = itemList.filter((item) => ids.includes(item._id));
+        findList.forEach((item) => {
+            options.push({
+                label: item.item_name,
+                value: item._id,
+            });
+        });
+        return options;
+    }
 
     return (
         <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
@@ -75,6 +90,7 @@ const CategoryForm = ({
                     label="Needed Parts"
                     name="needed_part"
                     rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
+                    value={getItemOptions(currentRow?.needed_part)}
                 >
                     <Select
                         mode="tags"
@@ -85,7 +101,7 @@ const CategoryForm = ({
                             label: item.item_name,
                         }))}
                     />
-                   
+
                 </Form.Item>
 
 

@@ -7,8 +7,8 @@ const authMiddle = {}
 authMiddle.checkToken = async (req, res, next) => {
     try {
         const request_url = req.originalUrl.split('?').shift();
-        console.log('checkToken', request_url)
-        if (config.without_check_token.indexOf(request_url) > -1 ) {
+        // console.log('checkToken', request_url)
+        if (config.without_check_token.indexOf(request_url) > -1) {
             next();
             return;
         }
@@ -25,7 +25,7 @@ authMiddle.checkToken = async (req, res, next) => {
                 return;
             }
             const user = await userModel.findOne({ email: data.email }).populate('role');
-            console.log('checkToken', user);
+            // console.log('checkToken', user);
             if (!user) {
                 helper.resError(res, 'User not found', 403);
                 return;

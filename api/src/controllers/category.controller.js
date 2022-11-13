@@ -1,4 +1,5 @@
 const categoryModel = require('../models/category.model');
+const itemModel = require('../models/item.model');
 const helper = require('../utils/helper');
 
 const categoryController = {};
@@ -7,6 +8,7 @@ const categoryController = {};
 categoryController.list = async (req, res) => {
     try {
         const categorys = await categoryModel.find();
+        console.log(categorys)
         res.json({
             status: 'success',
             data: categorys
@@ -26,14 +28,14 @@ categoryController.get = async (req, res) => {
 
 categoryController.add = async (req, res) => {
     try {
-        const { category_name, category_qty, category_price,category_hrs,needed_part } = req.body;
+        const { category_name, category_qty, category_price, category_hrs, needed_part } = req.body;
 
         const category = new categoryModel({
             category_name: category_name,
             category_qty: category_qty,
-            category_price:category_price,
-            category_hrs:category_hrs,
-            needed_part:needed_part
+            category_price: category_price,
+            category_hrs: category_hrs,
+            needed_part: needed_part
         });
         await category.save();
         res.status(201).json({ status: 'success', message: 'Add new product successful' })
@@ -44,14 +46,15 @@ categoryController.add = async (req, res) => {
 
 categoryController.update = async (req, res) => {
     try {
-        const { category_name,category_qty,category_price,category_hrs,needed_part} = req.body;
-        console.log(req.body);
+        const { category_name, category_qty, category_price, category_hrs, needed_part } = req.body;
+        console.table(req.body);
         res.category.category_name = category_name;
         res.category.category_qty = category_qty;
-        res.category.category_price= category_price;
+        res.category.category_price = category_price;
         res.category.category_hrs = category_hrs;
-        res.category.needed_part=needed_part;
+        res.category.needed_part = needed_part;
         res.category.create_at = Date.now();
+        console.log(res.category);
         await res.category.save();
         res.status(201).json({ status: 'success', message: 'Update product successful' })
     } catch (error) {
