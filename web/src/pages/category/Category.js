@@ -14,6 +14,7 @@ import moment from 'moment';
 import AdminManageBar from "../../components/AdminManageBar";
 import UserManageBar from "../../components/UserManageBar";
 
+
 async function HandleAction(action, id, params) {
     try {
         if (action === 'add') {
@@ -100,24 +101,18 @@ const Category = ({user}) => {
         }
     ];
 
-    const expandedRowRender = () => {
-        const columns = [
-          {
-            title: 'Part Name',
-            dataIndex: 'item_name',
-          },
-          {
-            title: 'Needed QTY',
-            dataIndex: 'needed_qty',
-          },
-          {
-            title: 'Unit Price',
-            dataIndex: 'price',
-          },
-        ];
-  
-    return <Table columns={columns} dataSource={itemList} pagination={false} />;
-  };
+  const needPartcolumns = [
+    {
+      title: 'Part Name',
+      dataIndex: '_id',
+      render: (_, row) => row._id?.item_name,
+    },
+    {
+        title: 'Needed QTY',
+        dataIndex: '',
+    }
+
+];
     
 
     useEffect(() => {
@@ -132,8 +127,11 @@ const Category = ({user}) => {
             try {
                 const result = await categoryListAPI();
                 
-                const list = result.data.map((item, index) => ({...item, key: index + 1}));
+                const list = result.data.map((item, index) => (
+                    {...item, key: index + 1}
+                    ));
                 setCategoryList(list);
+                console.log(list);
             } catch (error) {
                 console.log('getCategorylist is error: ', error.message);
             }
@@ -181,10 +179,16 @@ const Category = ({user}) => {
                 
                 <Table 
                 columns={columns} 
-                 expandable={{
-                    expandedRowRender,
-                    defaultExpandedRowKeys: ['0'],
-                  }}
+                expandable={
+                    {
+                    expandedRowRender:(record) => {
+                        if(record.neededPart){
+                            return   <Table  columns={needPartcolumns} dataSource={record.neededPart} pagination={false} />;
+                        }
+                    }
+                    }
+                    //defaultExpandedRowKeys: ['0'],
+                  }
                 dataSource={categoryList}/>
                 
             </div>

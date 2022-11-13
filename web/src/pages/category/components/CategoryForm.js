@@ -11,6 +11,7 @@ const CategoryForm = ({
 
     const [formRef, setFormRef] = React.useState(null);
 
+
     React.useEffect(() => {
         if (formRef) {
             formRef.setFieldsValue({
@@ -18,10 +19,11 @@ const CategoryForm = ({
                 category_qty: currentRow?.category_qty,
                 category_price: currentRow?.category_price,
                 category_hrs: currentRow?.category_hrs,
-                category_part:currentRow?.category_part?._id || itemList[0]?._id,
+                neededPart:currentRow?.neededPart?._id || itemList[0]?._id,
             });
         }
     }, [formRef, currentRow, itemList]);
+
 
     return (
         <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
@@ -73,11 +75,13 @@ const CategoryForm = ({
 
                 <Form.Item
                     label="Needed Parts"
-                    name="category_part"
+                    name="neededPart"
                     rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
                 >
                     <Select
+                     //mode="tags"
                         placeholder="Please select"
+                        //tokenSeparators={[" ", ","]}
                         width="50%"
                         options={itemList.map((item) => ({
                             value: item._id,

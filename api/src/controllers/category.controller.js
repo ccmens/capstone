@@ -26,14 +26,13 @@ categoryController.get = async (req, res) => {
 
 categoryController.add = async (req, res) => {
     try {
-        const { category_name, category_qty, category_price,category_hrs,category_part } = req.body;
-
+        const { category_name, category_qty, category_price,category_hrs,neededPart,item} = req.body;
         const category = new categoryModel({
             category_name: category_name,
             category_qty: category_qty,
             category_price:category_price,
             category_hrs:category_hrs,
-            category_part:category_part
+            neededPart:neededPart
         });
         await category.save();
         res.status(201).json({ status: 'success', message: 'Add new product successful' })
@@ -44,13 +43,13 @@ categoryController.add = async (req, res) => {
 
 categoryController.update = async (req, res) => {
     try {
-        const { category_name,category_qty,category_price,category_hrs,category_part} = req.body;
-
+        const { category_name,category_qty,category_price,category_hrs,neededPart,item} = req.body;
+        
         res.category.category_name = category_name;
         res.category.category_qty = category_qty;
         res.category.category_price= category_price;
         res.category.category_hrs = category_hrs;
-        res.category.category_part=category_part;
+        res.category.neededPart=neededPart;
         res.category.create_at = Date.now();
         await res.category.save();
         res.status(201).json({ status: 'success', message: 'Update product successful' })

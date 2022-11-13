@@ -123,7 +123,7 @@ const ItemForm = ({
 
                 <Form.Item
                     label="Product"
-                    name="category"
+                    name="needed"
                     rules={[{ required: true, message: "Please select a product!" }]}
                 >
                     <Select
