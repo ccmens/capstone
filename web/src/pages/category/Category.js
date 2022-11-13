@@ -122,8 +122,6 @@ const Category = ({ user }) => {
     ];
 
     const getPartItemList = (ids) => {
-        // console.log('ids=', ids)
-        // return 'aaaa';
         if (!ids) {
             return 'item is empty';
         }
