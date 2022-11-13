@@ -100,12 +100,14 @@ const Category = ({user}) => {
         }
     ];
 
-    const expandedRowRender = () => {
-        const columns = [
+
+        const nestedcolumns = [
           {
             title: 'Part Name',
             dataIndex: 'item_name',
+            //render: (_, row) => row.item?.item_name,
           },
+          /*
           {
             title: 'Needed QTY',
             dataIndex: 'needed_qty',
@@ -114,11 +116,10 @@ const Category = ({user}) => {
             title: 'Unit Price',
             dataIndex: 'price',
           },
+          */
         ];
   
-    return <Table columns={columns} dataSource={itemList} pagination={false} />;
-  };
-    
+    console.log(tableList);
 
     useEffect(() => {
         if (!loading || !user) {
@@ -134,6 +135,12 @@ const Category = ({user}) => {
                 
                 const list = result.data.map((item, index) => ({...item, key: index + 1}));
                 setCategoryList(list);
+                const nestedList = result.data.map((item, index) => {
+                    return {
+                        item:item.needed_part
+                    }
+                });
+                setTableList(nestedList);
             } catch (error) {
                 console.log('getCategorylist is error: ', error.message);
             }
@@ -182,7 +189,9 @@ const Category = ({user}) => {
                 <Table 
                 columns={columns} 
                  expandable={{
-                    expandedRowRender,
+                    expandedRowRender:(record) => {
+                        return <Table rowKey={record=>record.key} columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
+                 },
                     defaultExpandedRowKeys: ['0'],
                   }}
                 dataSource={categoryList}/>

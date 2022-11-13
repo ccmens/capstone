@@ -18,7 +18,7 @@ const CategoryForm = ({
                 category_qty: currentRow?.category_qty,
                 category_price: currentRow?.category_price,
                 category_hrs: currentRow?.category_hrs,
-                category_part:currentRow?.category_part?._id || itemList[0]?._id,
+                needed_part:currentRow?.needed_part?.item?._id || itemList[0]?._id,
             });
         }
     }, [formRef, currentRow, itemList]);
@@ -73,10 +73,11 @@ const CategoryForm = ({
 
                 <Form.Item
                     label="Needed Parts"
-                    name="category_part"
+                    name="needed_part"
                     rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
                 >
                     <Select
+                        mode="tags"
                         placeholder="Please select"
                         width="50%"
                         options={itemList.map((item) => ({
