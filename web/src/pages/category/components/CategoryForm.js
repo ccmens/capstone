@@ -94,6 +94,7 @@ const CategoryForm = ({
                 >
                     <Select
                         mode="tags"
+                        value={getItemOptions(currentRow?.needed_part)}
                         placeholder="Please select"
                         width="50%"
                         options={itemList.map((item) => ({

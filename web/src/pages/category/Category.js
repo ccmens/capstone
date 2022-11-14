@@ -56,7 +56,7 @@ const Category = ({ user }) => {
     };
 
     const columns = [
-
+        
         {
             title: 'Products Name',
             dataIndex: 'category_name',
@@ -99,6 +99,11 @@ const Category = ({ user }) => {
             render: (text) => moment(text).format('YYYY-MM-DD HH:mm')
         },
         {
+            title: 'Needed Part',
+            dataIndex: 'needed_part',
+            render: (_,row) => <ol>{getPartItemList(row?.needed_part)}</ol>
+        },
+        {
             title: 'Action',
             key: 'action',
             render: (_, row) => (
@@ -121,40 +126,46 @@ const Category = ({ user }) => {
     ];
 
 
-    const nestedcolumns = [
-        {
-            title: 'Part Name',
-            dataIndex: 'item_name',
-            //render: (_, row) => row.item?.item_name,
-        },
-        /*
-        {
-          title: 'Needed QTY',
-          dataIndex: 'needed_qty',
-        },
-        {
-          title: 'Unit Price',
-          dataIndex: 'price',
-        },
-        */
-    ];
 
     const getPartItemList = (ids) => {
+        console.log('ids=', ids)
+        // return 'aaaa';
         if (!ids) {
             return 'item is empty';
         }
-        let text = '';
+        let text = "";
         const list = [];
         ids.forEach(id => {
             const item = itemList.find(item => item._id === id);
             if (item) {
                 list.push(item);
-                text += item.item_name + '<br/>';
+                
+                text +=  item.item_name + '\r\n';
             }
         });
         return text;
     }
 
+/*
+        const nestedcolumns = [
+          {
+            title: 'Part Name',
+            dataIndex: 'needed_part',
+            render:(_,row) => row._id?.item?.item_name,
+            
+          },
+          
+          {
+            title: 'Needed QTY',
+            dataIndex: 'needed_qty',
+          },
+          {
+            title: 'Unit Price',
+            dataIndex: 'price',
+          },
+          
+        ];
+  */
     console.log(tableList);
 
     useEffect(() => {
@@ -170,12 +181,8 @@ const Category = ({ user }) => {
                 const result = await categoryListAPI();
                 const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setCategoryList(list);
-                const nestedList = result.data.map((item, index) => {
-                    return {
-                        item: item.needed_part
-                    }
-                });
-                setTableList(nestedList);
+               
+                
             } catch (error) {
                 console.log('getCategorylist is error: ', error.message);
             }
@@ -220,17 +227,11 @@ const Category = ({ user }) => {
                     currentRow={currentRow}
                     itemList={itemList}
                 />
-
-                <Table
-                    columns={columns}
-                    expandable={{
-                        expandedRowRender: (record) => {
-                            return <Table rowKey={record => record.key} columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
-                        },
-                        defaultExpandedRowKeys: ['0'],
-                    }}
-                    dataSource={categoryList} />
-
+                
+                <Table 
+                columns={columns} 
+                dataSource={categoryList}/>
+                
             </div>
         </>
     );
