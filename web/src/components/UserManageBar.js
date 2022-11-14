@@ -11,7 +11,7 @@ const UserManageBar = () => {
     return (
         <div className='manage-bar'>
             <NavLink className={NavActive} to='/profile'>Profile</NavLink>
-            <NavLink className={NavActive} to='/items'>Parts Management</NavLink>
+            <NavLink className={NavActive} to='/items'>Parts</NavLink>
         </div>
     )
 }
