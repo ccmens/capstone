@@ -3,6 +3,7 @@ import './Category.css';
 import { Table, Button, Space, message } from 'antd';
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
+import { StopOutlined } from '@ant-design/icons';
 import {
     categoryList as categoryListAPI, categoryAdd, categoryUpdate, categoryDelete,
     itemList as itemListAPI
@@ -66,13 +67,30 @@ const Category = ({ user }) => {
         {
             title: 'Product Stock',
             dataIndex: 'category_qty',
+            render: (_, row) => {
+                if (row.category_qty == 0) {
+                    return (
+                        <span style={{ color: 'red' }}>
+                            <StopOutlined /><span> Out of stock</span>
+                        </span>
+                    );
+                } else if (row.category_qty < 10) {
+                    return (
+                        <span style={{ color: 'orange' }}>
+                            <span>Running low!<br />{row.category_qty}</span>
+                        </span>
+                    );
+                } else {
+                    return <span>{row.category_qty}</span>
+                }
+            }
         },
         {
-            title: 'Product Price ($cad)',
+            title: 'Product Price ($CAD)',
             dataIndex: 'category_price',
         },
         {
-            title: 'Build Hours (hrs)',
+            title: 'Build Duration (hrs)',
             dataIndex: 'category_hrs',
         },
         {
@@ -150,7 +168,6 @@ const Category = ({ user }) => {
         async function getCategoryList() {
             try {
                 const result = await categoryListAPI();
-
                 const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setCategoryList(list);
                 const nestedList = result.data.map((item, index) => {

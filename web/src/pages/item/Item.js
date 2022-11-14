@@ -15,6 +15,7 @@ import ItemForm from "./components/ItemForm";
 import ConfirmComponent from "@components/ConfirmComponent";
 import ExportButton from '@components/ExportButton';
 import { ExportToCsv } from '@components/ExportUtils';
+import { StopOutlined } from '@ant-design/icons';
 import moment from "moment";
 
 async function HandleAction(action, id, params) {
@@ -90,7 +91,10 @@ const ItemList = ({ user }) => {
             title: 'Picture',
             dataIndex: 'image',
             render: (_, row) => <img alt={row.name} width={200} height={200}
-                src={row.image || '/images/default-item.png'} />,
+                src={row.image || '/images/default-item.png'}
+                style={{
+                    'object-fit': 'contain'
+                }} />,
         },
         {
             title: 'Item Name',
@@ -114,6 +118,23 @@ const ItemList = ({ user }) => {
         {
             title: 'Stock',
             dataIndex: 'stock',
+            render: (_, row) => {
+                if (row.stock == 0) {
+                    return (
+                        <span style={{ color: 'red' }}>
+                            <StopOutlined /><span> Out of stock</span>
+                        </span>
+                    );
+                } else if (row.stock < 10) {
+                    return (
+                        <span style={{ color: 'orange' }}>
+                            <span>Running low!<br/>{row.stock}</span>
+                        </span>
+                    );
+                } else {
+                    return <span>{row.stock}</span>
+                }
+            }
         },
         {
             title: 'Create At',
@@ -215,7 +236,7 @@ const ItemList = ({ user }) => {
         <>
             <div className='item-wrap'>
 
-                <h3 className='common-title'>Item List</h3>
+                <h3 className='common-title'>Parts</h3>
 
                 <div className='flex justify-between'>
                     <Row>
@@ -248,7 +269,9 @@ const ItemList = ({ user }) => {
                         expandedRowRender,
                         defaultExpandedRowKeys: ['0'],
                     }}
-                    style={{ marginTop: '10px' }} columns={columns} dataSource={tableList} />
+                    style={{
+                        marginTop: '10px'
+                    }} columns={columns} dataSource={tableList} />
                 <ItemForm
                     handleSubmit={handleSubmit}
                     isFormVisible={isFormVisible}
