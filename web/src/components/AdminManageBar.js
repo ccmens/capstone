@@ -10,6 +10,7 @@ const AdminManageBar = () => {
             <NavLink to='/rolelist' className="btn">Roles</NavLink>
             <NavLink to='/items' className="btn">Parts</NavLink>
             <NavLink to='/category' className="btn">Products</NavLink>
+            <NavLink to='/report' className="btn">Report</NavLink>
         </div>
     )
 }

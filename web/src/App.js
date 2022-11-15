@@ -20,6 +20,7 @@ import ConfirmComponent from "./components/ConfirmComponent";
 import RegisterV2 from "./pages/user/RegisterV2";
 import BannerSection from "./components/BannerSection";
 import Item from "./pages/item/Item";
+import Report from "./pages/Report/Report";
 
 function App() {
 
@@ -106,6 +107,7 @@ function App() {
                 <Route path="/userlist" element={<UserList user={user}/>}/>
                 <Route path="/category" element={<Category user={user}/>}/>
                 <Route path="/rolelist" element={<Role user={user}/>}/>
+                <Route path="/report" element={<Report user={user}/>}/>
                 <Route path="/profile" element={<Profile user={user} handleAction={handleAction}/>}/>
                 <Route path="/error403" element={<ErrorPage403/>}/>
                 <Route path="/error404" element={<ErrorPage404/>}/>

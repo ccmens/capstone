@@ -1,12 +1,12 @@
-import { Modal, Form, Input, Button, Select } from 'antd';
+import { Modal, Form, Input, Button, Select, InputNumber } from 'antd';
 import React from 'react';
-import RoleData from '../data/RoleData';
 
-const RoleForm = ({
+const CategoryForm = ({
     handleSubmit,
     currentRow,
     isFormVisible,
     setIsFormVisible,
+    itemList,
 }) => {
 
     const [formRef, setFormRef] = React.useState(null);
@@ -14,16 +14,34 @@ const RoleForm = ({
     React.useEffect(() => {
         if (formRef) {
             formRef.setFieldsValue({
-                role_name: currentRow?.role_name || RoleData.RoleType[0],
-                title: currentRow?.title,
+                category_name: currentRow?.category_name,
+                category_qty: currentRow?.category_qty,
+                category_price: currentRow?.category_price,
+                category_hrs: currentRow?.category_hrs,
+                // needed_part: currentRow?.needed_part?.item?._id || itemList[0]?._id,
             });
         }
-    }, [formRef, currentRow]);
+    }, [formRef, currentRow, itemList]);
+
+    const getItemOptions = (ids) => {
+        if (!ids || ids.length === 0) {
+            return [];
+        }
+        const options = [];
+        const findList = itemList.filter((item) => ids.includes(item._id));
+        findList.forEach((item) => {
+            options.push({
+                label: item.item_name,
+                value: item._id,
+            });
+        });
+        return options;
+    }
 
     return (
-        <Modal title={currentRow ? 'Edit Role' : 'Add Role'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
+        <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
             <Form
-                name="role form"
+                name="category form"
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 12 }}
                 onFinish={(values) => {
@@ -37,19 +55,56 @@ const RoleForm = ({
                 ref={setFormRef}
             >
                 <Form.Item
-                    label="Role Type"
-                    name="role_name"
-                    rules={[{ required: true, message: 'Please select role type!' }]}
-                >
-                    <Select options={RoleData.RoleType.map(item => ({ value: item, label: item }))} />
-                </Form.Item>
-                <Form.Item
-                    label="Title"
-                    name="title"
-                    rules={[{ required: true, message: 'Please enter title!' }]}
+                    label="Product Name"
+                    name="category_name"
+                    rules={[{ required: true, message: 'Please enter product name!' }]}
                 >
                     <Input />
                 </Form.Item>
+
+                <Form.Item
+                    label="Product Stock"
+                    name="category_qty"
+                    rules={[{ required: true, message: 'Please enter product stock amount!' }]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Product Price"
+                    name="category_price"
+                    rules={[{ required: true, message: 'Please enter product product price!' }]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Build Hours"
+                    name="category_hrs"
+                    rules={[{ required: true, message: 'Please enter product building hours!' }]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Needed Parts"
+                    name="needed_part"
+                    rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
+                    value={getItemOptions(currentRow?.needed_part)}
+                >
+                    <Select
+                        mode="tags"
+                        value={getItemOptions(currentRow?.needed_part)}
+                        placeholder="Please select"
+                        width="50%"
+                        options={itemList.map((item) => ({
+                            value: item._id,
+                            label: item.item_name,
+                        }))}
+                    />
+
+                </Form.Item>
+
 
                 <Form.Item
                     wrapperCol={{
@@ -66,4 +121,4 @@ const RoleForm = ({
     );
 };
 
-export default RoleForm;
+export default CategoryForm;
