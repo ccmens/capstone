@@ -61,6 +61,12 @@ nav {
     color: #5DA9E9;
 }
 
+/* 
+.logo:hover {
+    background-image: url('/images/logo_hover.gif');
+    width: 80px;
+} */
+
 .userinfo {
     display: flex;
     justify-content: center;

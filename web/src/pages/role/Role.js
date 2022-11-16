@@ -1,10 +1,10 @@
 import './Role.css';
-import {Table, Button, Space, message} from 'antd';
-import React, {useState, useEffect} from 'react';
+import { Table, Button, Space, message } from 'antd';
+import React, { useState, useEffect } from 'react';
 import {
     roleList as roleListAPI, roleAdd, roleUpdate, roleDelete
 } from '@services/api.service';
-import RoleForm from './components/RoleForm';
+import CategoryForm from './components/RoleForm';
 import BannerSection from '@components/BannerSection';
 // import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
@@ -30,7 +30,7 @@ async function HandleAction(action, id, params) {
     }
 }
 
-const Role = ({user}) => {
+const Role = ({ user }) => {
 
     const [loading, setLoading] = useState(true);
     const [roleList, setRoleList] = useState([]);
@@ -85,7 +85,7 @@ const Role = ({user}) => {
         async function getRoleList() {
             try {
                 const result = await roleListAPI();
-                const list = result.data.map((item, index) => ({...item, key: index + 1}));
+                const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setRoleList(list);
             } catch (error) {
                 console.log('getUserList is error: ', error.message);
@@ -110,13 +110,13 @@ const Role = ({user}) => {
             <div className='role-wrap'>
                 <h3 className='common-title'>Role List</h3>
                 <Button type="primary" size='large' onClick={() => showModal(null)}>Add</Button>
-                <RoleForm
+                <CategoryForm
                     handleSubmit={handleSubmit}
                     isFormVisible={isFormVisible}
                     setIsFormVisible={setIsFormVisible}
                     currentRow={currentRow}
                 />
-                <Table columns={columns} dataSource={roleList}/>
+                <Table columns={columns} dataSource={roleList} />
             </div>
         </>
     );

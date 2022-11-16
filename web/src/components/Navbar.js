@@ -1,10 +1,14 @@
 import './Navbar.css'
 import { Link, NavLink } from 'react-router-dom'
 import React from 'react'
+import { useState } from 'react';
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, Menu } from 'antd';
 import AdminManageBar from "./AdminManageBar";
 import UserManageBar from "./UserManageBar";
+import logo from '../asset/logo.jpg';
+import logoh from '../asset/logo_hover.gif';
+
 
 const Navbar = ({ user, handleLogout }) => {
     const menu = (
@@ -110,15 +114,24 @@ const Navbar = ({ user, handleLogout }) => {
         />
     );
 
+    const [ImgtHover, setImgtHover] = useState(false);
     return (
         <header>
             <nav>
                 <div className="navbar">
                     <div className='menu'>
-                        <div className="flex-item">
-                            <NavLink to="/"><img src="/images/logo.jpg" width={85} /></NavLink>
-                            <NavLink className="home" to="/"></NavLink>
+                        <div className="flex-item"
+                            onMouseOver={() => setImgtHover(true)}
+                            onMouseOut={() => setImgtHover(false)}
+                        >
+                            <NavLink to="/">
+                                <img
+                                    src={ImgtHover ? logoh : logo} width={80}
+                                /></NavLink>
                         </div>
+
+
+                        {/* <NavLink to="/"><img src="/images/logo_hover.gif" width={80} /></NavLink> */}
                         {!user && (
                             <div className="flex-item">
                                 <Link to='/login' className='btn'>Login</Link>
@@ -159,6 +172,8 @@ const Navbar = ({ user, handleLogout }) => {
             </nav>
         </header>
     );
+
 }
+
 
 export default Navbar;
