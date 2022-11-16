@@ -97,10 +97,10 @@ const CategoryForm = ({
                         value={getItemOptions(currentRow?.needed_part)}
                         placeholder="Please select"
                         width="50%"
-                        options={itemList.map((item) => ({
-                            value: item._id,
-                            label: item.item_name,
-                        }))}
+                        // options={itemList.map((item) => ({
+                        //     value: item._id,
+                        //     label: item.item_name,
+                        // }))}
                     />
 
                 </Form.Item>
