@@ -5,15 +5,17 @@ const categorySchema = new mongoose.Schema({
     category_qty: { type: Number },
     category_price: { type: Number },
     category_hrs: { type: Number },
-    needed_part: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'item' }
+    needed_part: [{
+        part:{ type: mongoose.Schema.Types.ObjectId, ref: 'item' },
+        needed_qty: { type: Number },
+
         /*
         category_name: { type: String },
         item_name: { type: String },
         needed_qty: { type: Number },
         total_price: { type: Number },
         */
-    ],
+}],
     created_at: { type: Date, default: Date.now },
 })
 

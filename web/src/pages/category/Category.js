@@ -99,9 +99,9 @@ const Category = ({ user }) => {
             render: (text) => moment(text).format('YYYY-MM-DD HH:mm')
         },
         {
-            title: 'Needed Part',
-            dataIndex: 'needed_part',
-            render: (_,row) => <ol>{getPartItemList(row?.needed_part)}</ol>
+            //title: 'Needed Part',
+            //dataIndex: 'needed_part',
+            //render: (_,row) => <ol>{getPartItemList(row?.needed_part.item)}</ol>
         },
         {
             title: 'Action',
@@ -145,13 +145,13 @@ const Category = ({ user }) => {
         });
         return text;
     }
-
-/*
+    
         const nestedcolumns = [
           {
             title: 'Part Name',
-            dataIndex: 'needed_part',
-            render:(_,row) => row._id?.item?.item_name,
+            dataIndex: 'part',
+            key:"items",
+            render:(_,row) => row.part?.item_name,
             
           },
           
@@ -159,14 +159,14 @@ const Category = ({ user }) => {
             title: 'Needed QTY',
             dataIndex: 'needed_qty',
           },
+          /*
           {
             title: 'Unit Price',
             dataIndex: 'price',
           },
-          
+          */
         ];
-  */
-    console.log(tableList);
+    
 
     useEffect(() => {
         if (!loading || !user) {
@@ -230,6 +230,12 @@ const Category = ({ user }) => {
                 
                 <Table 
                 columns={columns} 
+                expandable={{
+                    expandedRowRender:record => {
+                        return  <Table columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
+                    },
+                    //defaultExpandedRowKeys: ['0'],
+                  }}
                 dataSource={categoryList}/>
                 
             </div>

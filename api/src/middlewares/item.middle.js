@@ -21,7 +21,7 @@ itemMiddle.valid_item = [
 itemMiddle.getItem = async (req, res, next) => {
     try {
         const item = await itemModel.findOne({ _id: req.params.id }).populate('category');
-        console.log('getItem:', item);
+        console.log('----getItem:', item);
         if (item == null) {
             return res.status(404).json({ status: 'error', message: 'Cannot find item' })
         }

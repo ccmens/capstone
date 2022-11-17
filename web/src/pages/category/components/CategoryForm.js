@@ -1,4 +1,5 @@
-import { Modal, Form, Input, Button, Select, InputNumber } from 'antd';
+import { Modal, Form, Space, Input, Button, Select, InputNumber } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import React from 'react';
 
 const CategoryForm = ({
@@ -8,6 +9,7 @@ const CategoryForm = ({
     setIsFormVisible,
     itemList,
 }) => {
+ 
 
     const [formRef, setFormRef] = React.useState(null);
 
@@ -18,11 +20,15 @@ const CategoryForm = ({
                 category_qty: currentRow?.category_qty,
                 category_price: currentRow?.category_price,
                 category_hrs: currentRow?.category_hrs,
-                // needed_part: currentRow?.needed_part?.item?._id || itemList[0]?._id,
+                /*needed_part: {
+                    part:currentRow?.needed_part?.part|| itemList[0]?._id,
+                    needed_qty:currentRow?.needed_part.needed_qty,
+                },*/
+                needed_part:[]
             });
         }
     }, [formRef, currentRow, itemList]);
-
+/*
     const getItemOptions = (ids) => {
         if (!ids || ids.length === 0) {
             return [];
@@ -37,7 +43,7 @@ const CategoryForm = ({
         });
         return options;
     }
-
+*/
     return (
         <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
             <Form
@@ -54,6 +60,7 @@ const CategoryForm = ({
                 autoComplete="off"
                 ref={setFormRef}
             >
+
                 <Form.Item
                     label="Product Name"
                     name="category_name"
@@ -86,17 +93,26 @@ const CategoryForm = ({
                     <Input />
                 </Form.Item>
 
+
+     {/** 
+                    <Form.Item label="needed_part">
+            <Input.Group compact>
+                
                 <Form.Item
-                    label="Needed Parts"
-                    name="needed_part"
-                    rules={[{ required: true, message: 'Please choose the needed parts for the product!' }]}
-                    value={getItemOptions(currentRow?.needed_part)}
+                  name={ ['needed_part','part']}
+
+                  rules={[
+                    {
+                      message: 'Please choose a need part',
+                    },
+                  ]}
                 >
-                    <Select
-                        mode="tags"
-                        value={getItemOptions(currentRow?.needed_part)}
-                        placeholder="Please select"
-                        width="50%"
+                 <Select
+                        
+                        //value={getItemOptions(currentRow?.needed_part)}
+
+                        placeholder="Select needed part"
+                        width="250%"
                         options={itemList.map((item) => ({
                             value: item._id,
                             label: item.item_name,
@@ -105,6 +121,21 @@ const CategoryForm = ({
 
                 </Form.Item>
 
+                <Form.Item
+                  name={['needed_part','needed_qty'] }
+
+                  rules={[
+                    {
+                        type: 'number', min: 0,
+                    },
+                  ]}
+                >
+                  <InputNumber placeholder="Enter Needed Qty"/>
+                </Form.Item>
+
+</Input.Group>
+</Form.Item>
+
 
                 <Form.Item
                     wrapperCol={{
@@ -112,10 +143,90 @@ const CategoryForm = ({
                         span: 12,
                     }}
                 >
+                    **/}
+                <Form.List name="needed_part">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map((field) => (
+              <Space key={field.key} align="baseline">
+                <Form.Item
+                  noStyle
+                  shouldUpdate={(prevValues, curValues) =>
+                    prevValues.needed_part !== curValues.needed_part
+                  }
+                >
+                  {() => (
+                    <Form.Item
+                      {...field}
+                      //label="Sight"
+                      name={[field.name, 'part']}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Missing part',
+                        },
+                      ]}
+                    >
+                        {/**
+
+                     <Select
+                        disabled={!form.getFieldValue('area')}
+                        style={{
+                          width: 130,
+                        }}
+                      >
+                        {(sights[form.getFieldValue('area')] || []).map((item) => (
+                          <Option key={item} value={item}>
+                            {item}
+                          </Option>
+                        ))}
+                      </Select>
+ */}
+                     <Select
+                        
+                        //value={getItemOptions(currentRow?.needed_part)}
+
+                        placeholder="Select needed part"
+                        width="250%"
+                        options={itemList.map((item) => ({
+                            value: item._id,
+                            label: item.item_name,
+                        }))}
+                    />
+                    </Form.Item>
+                  )}
+                </Form.Item>
+                <Form.Item
+                  {...field}
+                  label="Price"
+                  name={[field.name, 'needed_qty']}
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Missing needed_qty',
+                    },
+                  ]}
+                >
+                 <InputNumber placeholder="Enter Needed Qty"/>
+                </Form.Item>
+
+                <MinusCircleOutlined onClick={() => remove(field.name)} />
+              </Space>
+            ))}
+
+            <Form.Item>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Add needed Part
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
+      
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
-                </Form.Item>
+               
             </Form>
         </Modal>
     );
