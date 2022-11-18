@@ -1,5 +1,6 @@
 import React from "react";
 import "./User.css";
+import styled from "styled-components";
 import { message, Button, Form, Input, Space } from "antd";
 import BannerSection from "@components/BannerSection";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +30,20 @@ export default function RegisterV2({ handleAction }) {
     form.resetFields();
   };
 
+  const EMAIL = styled(Input)`
+  border-radius: 20px;
+  padding: 5px;
+`
+  const PASSWORD = styled(Input.Password)`
+  border-radius: 20px;
+  padding: 5px;
+`
+
+  const NAME = styled(Input)`
+  border-radius: 20px;
+  padding: 5px;
+  `
+
   return (
     <>
 
@@ -54,7 +69,7 @@ export default function RegisterV2({ handleAction }) {
                 },
               ]}
             >
-              <Input />
+              <EMAIL />
             </Form.Item>
 
             <Form.Item
@@ -69,7 +84,7 @@ export default function RegisterV2({ handleAction }) {
                 },
               ]}
             >
-              <Input.Password />
+              <PASSWORD />
             </Form.Item>
 
             <Form.Item
@@ -84,7 +99,7 @@ export default function RegisterV2({ handleAction }) {
                 },
               ]}
             >
-              <Input.Password />
+              <PASSWORD />
             </Form.Item>
 
             <Form.Item
@@ -94,7 +109,7 @@ export default function RegisterV2({ handleAction }) {
                 { required: true, message: "Please input your first name!" },
               ]}
             >
-              <Input />
+              <NAME />
             </Form.Item>
 
             <Form.Item
@@ -104,7 +119,7 @@ export default function RegisterV2({ handleAction }) {
                 { required: true, message: "Please input your last name!" },
               ]}
             >
-              <Input />
+              <NAME />
             </Form.Item>
 
             <Form.Item>

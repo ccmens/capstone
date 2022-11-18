@@ -25,7 +25,7 @@ export default function LoginV2({ handleAction }) {
     };
     const onForgot = () => {
         message.success("Please contact Dev Team for further change.");
-      };
+    };
     const EMAIL = styled(Input)`
       border-radius: 20px;
       padding: 10px;
@@ -86,8 +86,8 @@ export default function LoginV2({ handleAction }) {
                         <Form.Item name="remember" valuePropName="checked">
                             <Checkbox>Remember me</Checkbox>
                             <Button type="text" style={{ float: "right" }} onClick={onForgot}>
-                         Forgot password
-                             </Button>
+                                Forgot password
+                            </Button>
                         </Form.Item>
 
 

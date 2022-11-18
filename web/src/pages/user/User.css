@@ -14,7 +14,7 @@
 }
 
 .register-wrap {
-    margin: 0 auto;
+    margin: 0 auto 17vh auto;
     width: 1280px;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@
 
 .register-form {
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
 }
 
 .login-wrap {
