@@ -27,12 +27,10 @@ export default function LoginV2({ handleAction }) {
         message.success("Please contact Dev Team for further change.");
     };
     const EMAIL = styled(Input)`
-      border-radius: 20px;
-      padding: 10px;
+        padding: 8px;
     `
     const PASSWORD = styled(Input.Password)`
-      border-radius: 20px;
-      padding: 10px;
+        padding: 8px; 
     `
     return (
         <>

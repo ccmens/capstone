@@ -31,17 +31,14 @@ export default function RegisterV2({ handleAction }) {
   };
 
   const EMAIL = styled(Input)`
-  border-radius: 20px;
-  padding: 5px;
+  padding: 6px;
 `
   const PASSWORD = styled(Input.Password)`
-  border-radius: 20px;
-  padding: 5px;
+  padding: 6px;
 `
 
   const NAME = styled(Input)`
-  border-radius: 20px;
-  padding: 5px;
+  padding: 6px;
   `
 
   return (
