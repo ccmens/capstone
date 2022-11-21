@@ -11,6 +11,7 @@ const AdminManageBar = () => {
             <NavLink to='/items' className="btn">Parts</NavLink>
             <NavLink to='/category' className="btn">Products</NavLink>
             <NavLink to='/report' className="btn">Report</NavLink>
+            <NavLink to='/sales' className="btn">Sales</NavLink>
         </div>
     )
 }

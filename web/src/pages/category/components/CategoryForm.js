@@ -44,8 +44,16 @@ const CategoryForm = ({
         return options;
     }
 */
+const formItemLayout = {
+
+  wrapperCol: {
+    xs: { span: 54, offset: 0 },
+    sm: { span: 30, offset: 4 },
+  },
+};
+
     return (
-        <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)}>
+        <Modal title={currentRow ? 'Edit Products' : 'Add Products'} footer={null} visible={isFormVisible} onCancel={() => setIsFormVisible(false)} {...formItemLayout}>
             <Form
                 name="category form"
                 labelCol={{ span: 8 }}
@@ -74,7 +82,7 @@ const CategoryForm = ({
                     name="category_qty"
                     rules={[{ required: true, message: 'Please enter product stock amount!' }]}
                 >
-                    <Input />
+                    <InputNumber min={1}/>
                 </Form.Item>
 
                 <Form.Item
@@ -82,7 +90,7 @@ const CategoryForm = ({
                     name="category_price"
                     rules={[{ required: true, message: 'Please enter product product price!' }]}
                 >
-                    <Input />
+                    <InputNumber min={1}/>
                 </Form.Item>
 
                 <Form.Item
@@ -144,7 +152,7 @@ const CategoryForm = ({
                     }}
                 >
                     **/}
-                <Form.List name="needed_part">
+                <Form.List name="needed_part" >
         {(fields, { add, remove }) => (
           <>
             {fields.map((field) => (
@@ -158,7 +166,7 @@ const CategoryForm = ({
                   {() => (
                     <Form.Item
                       {...field}
-                      //label="Sight"
+                      //label="Part Name"
                       name={[field.name, 'part']}
                       rules={[
                         {
@@ -185,9 +193,11 @@ const CategoryForm = ({
                      <Select
                         
                         //value={getItemOptions(currentRow?.needed_part)}
-
+                        
                         placeholder="Select needed part"
-                        width="250%"
+                        style={{
+                          width:'200%',
+                        }}
                         options={itemList.map((item) => ({
                             value: item._id,
                             label: item.item_name,
@@ -198,7 +208,7 @@ const CategoryForm = ({
                 </Form.Item>
                 <Form.Item
                   {...field}
-                  label="Price"
+                  //label="Needed QTY"
                   name={[field.name, 'needed_qty']}
                   rules={[
                     {
@@ -214,19 +224,26 @@ const CategoryForm = ({
               </Space>
             ))}
 
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+            <Form.Item style={{display:'flex',alignItems:'center',justifyContent: 'center'}}>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} style={{
+               width:'250%',
+              }}>
                 Add needed Part
               </Button>
             </Form.Item>
           </>
         )}
       </Form.List>
-      
+      <Form.Item
+                    wrapperCol={{
+                        offset: 8,
+                        span: 12,
+                    }}
+                >
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
-               
+               </Form.Item>
             </Form>
         </Modal>
     );

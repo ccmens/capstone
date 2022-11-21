@@ -272,3 +272,58 @@ export async function itemUpload(file) {
     headers['Content-Type'] = 'multipart/form-data';
     return await httpClient.post(`/api/item/upload/${file.uid}`, formData, headers);
 }
+
+// sales api list
+export async function salesList(params) {
+    try {
+        const res = await httpClient.get(`/api/sales`, setHeaders());
+        return res.data;
+    } catch (error) {
+        throw error.response;
+    }
+}
+
+export async function salesAdd(formData) {
+    try {
+        const res = await httpClient.post(`/api/sales`, formData, setHeaders());
+        return res.data;
+    } catch (error) {
+        throw error.response;
+    }
+}
+
+export async function salesUpdate(id, formData) {
+    try {
+        const res = await httpClient.put(`/api/sales/${id}`, formData, setHeaders());
+        return res.data;
+    } catch (error) {
+        throw error.response;
+    }
+}
+
+export async function salesDelete(id) {
+    try {
+        const res = await httpClient.delete(`/api/sales/${id}`, setHeaders());
+        return res.data;
+    } catch (error) {
+        throw error.response;
+    }
+}
+
+export async function salesRecover(id, formData) {
+    try {
+        const res = await httpClient.put(`/api/sales/recover/${id}`, formData, setHeaders());
+        return res.data;
+    } catch (error) {
+        throw error.response;
+    }
+}
+
+export async function salesExport(params) {
+    try {
+        const res = await httpClient.get(`/api/sales/export`, setHeaders());
+        return res.data;
+    } catch (error) {
+        throw error.response;
+    }
+}

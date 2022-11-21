@@ -1,4 +1,5 @@
-import { Modal, Form, Input, Button, Select, message, Upload, InputNumber } from "antd";
+import { Modal, Form, Input, Button, Select, message, Upload, InputNumber,Space } from "antd";
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import React, { useState, useEffect } from "react";
 import { itemUpload } from '@services/api.service';
 
@@ -30,15 +31,18 @@ const ItemForm = ({
         if (formRef) {
             formRef.setFieldsValue({
                 item_name: currentRow?.item_name,
-                category: currentRow?.category?._id || categoryList[0]?._id,
+                category: [],
                 price: currentRow?.price,
                 stock: currentRow?.stock,
-                needed_qty: currentRow?.needed_qty,
+                //needed_qty: currentRow?.needed_qty,
+                digikey_part_num:currentRow?.digikey_part_num,
+                supplier_link:currentRow?.supplier_link,
             });
             setFileList(getPicture(currentRow?.image || ''));
         }
     }, [formRef, currentRow, categoryList]);
 
+    console.log(categoryList);
 
     const handleChange = (res) => {
         if (!res.file || !res.file.status) {
@@ -76,7 +80,7 @@ const ItemForm = ({
             onCancel={() => {
                 formRef.setFieldsValue({
                     item_name: "",
-                    category: categoryList[0]?._id,
+                    //category: categoryList[0]?._id,
                     price: null,
                 });
                 setIsFormVisible(false);
@@ -120,42 +124,20 @@ const ItemForm = ({
                 >
                     <Input />
                 </Form.Item>
-
-                <Form.Item
-                    label="Product"
-                    name="category"
-                    rules={[{ required: true, message: "Please select a product!" }]}
-                >
-                    <Select
-                        mode="multiple"
-                        options={categoryList.map((item) => ({
-                            value: item._id,
-                            label: item.category_name,
-                        }))}
-                    />
-                </Form.Item>
-
                 <Form.Item
                     label="Price"
                     name="price"
                     rules={[{ required: true, message: "Please enter price!" }]}
                 >
-                    <Input type="number" />
+                     <InputNumber min={1}/>
                 </Form.Item>
-                <Form.Item
-                    label="Needed QTY"
-                    name="needed_qty"
-                    rules={[{ required: true, message: "Please enter price!" }]}
-                >
-                    <InputNumber />
-                </Form.Item>
-
+            
                 <Form.Item
                     label="Stock"
                     name="stock"
                     rules={[{ required: true, message: "Please enter Stock!" }]}
                 >
-                    <Input type="number" />
+                     <InputNumber min={1}/>
                 </Form.Item>
 
                 <Form.Item
@@ -190,7 +172,59 @@ const ItemForm = ({
                     </Upload>
 
                 </Form.Item>
+                <Form.List name="category" >
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map((field) => (
+              <Space key={field.key} align="baseline">
+                <Form.Item
+                  noStyle
+                  shouldUpdate={(prevValues, curValues) =>
+                    prevValues.category !== curValues.category
+                  }
+                >
+                  {() => (
+                    <Form.Item
+                      {...field}
+                      name={[field.name, 'category_name']}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Missing Product',
+                        },
+                      ]}
+                    >
+                     <Select
+                        
+                        //value={getItemOptions(currentRow?.needed_part)}
+                        placeholder="Select Related Product"
+                        style={{
+                          width:'200%',
+                        }}
+                        options={categoryList.map((category) => ({
+                            value: category._id,
+                            label: category.category_name,
+                        }))}
+                    />
+                    </Form.Item>
+                  )}
+                </Form.Item>
+       
 
+                <MinusCircleOutlined onClick={() => remove(field.name)} />
+              </Space>
+            ))}
+
+            <Form.Item style={{display:'flex',alignItems:'center',justifyContent: 'center'}}>
+              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} style={{
+               width:'250%',
+              }}>
+                Add Related Product
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
                 <Form.Item
                     wrapperCol={{
                         offset: 8,

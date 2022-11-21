@@ -40,12 +40,13 @@ const userRouter = require("./routes/user.route");
 const itemRouter = require("./routes/item.route");
 const roleRouter = require("./routes/role.route");
 const categoryRouter = require("./routes/category.route");
+const salesRouter = require("./routes/sales.route");
 
 app.use(config.prefix, userRouter);
 app.use(config.prefix, itemRouter);
 app.use(config.prefix, roleRouter);
 app.use(config.prefix, categoryRouter);
-
+app.use(config.prefix, salesRouter);
 // init role
 const roleModel = require("./models/role.model");
 const { table } = require("console");

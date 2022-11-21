@@ -20,40 +20,25 @@ import moment from "moment";
 
 async function HandleAction(action, id, params) {
     try {
-        var result = null;
-        switch (action) {
-            case "add":
-                result = await itemAdd(params);
-                break;
-            case "update":
-                result = await itemUpdate(id, params);
-                break;
-            case "delete":
-                result = await itemDelete(id);
-                break;
-            case "recover":
-                result = await itemRecover(id);
-                break;
-            case "export":
-                result = await itemExport(id);
-                break;
-            case "item-list":
-                result = await itemListAPI();
-                break;
-            case "category-list":
-                result = await categoryListAPI();
-                break;
-            default:
-                break;
+        if (action === "add") {
+             await itemAdd(params);
+        }else if (action === "update"){
+            await itemUpdate(id, params);
+        }else if (action === "delete"){
+             await itemDelete(id);
+        }else if (action === "recover"){
+             await itemRecover(id);
+        }else if (action === "export"){
+             await itemExport(id);
         }
-        // message.success('Handle action success');
-        return result;
+        message.success('Handle action success');
+        return true;
     } catch (error) {
         const text = `handle action is error: ${error?.data?.message || "please try again"
             }`;
         console.log(text);
         message.error(text);
-        return null;
+        return false;
     }
 }
 
@@ -172,17 +157,16 @@ const ItemList = ({ user }) => {
 
     ];
 
-    const expandedRowRender = () => {
-        const columns = [
+    
+        const nestedcolumns = [
             {
-                title: 'Part Name',
+                title: 'Realted Procuct',
                 dataIndex: 'category_name',
+                render:(_,row) => row.category_name?.category_name,
             },
 
         ];
 
-        return <Table columns={columns} dataSource={categoryList} pagination={false} />;
-    };
 
     useEffect(() => {
         if (!loading || !user) {
@@ -192,23 +176,32 @@ const ItemList = ({ user }) => {
         setIsFormVisible(false);
         setLoading(false);
 
-        async function fetchData() {
+        async function getItemList() {
 
-            const result = await HandleAction('item-list');
-            if (result) {
+            try{
+                const result = await itemListAPI();
                 const lists = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setItemList(lists);
                 setTableList(lists);
-            }
-            const categorys = await HandleAction('category-list');
-            if (categorys) {
-                setCategoryList(categorys.data);
+            
+        } catch (error) {
+            console.log("getPartList is error: ", error.message);
+        }
+        }
+        getItemList();
+
+        async function getCategoryList() {
+            try {
+                const result = await categoryListAPI();
+                setCategoryList(result.data);
+            } catch (error) {
+                console.log("getCategoryList is error: ", error.message);
             }
         }
 
-        fetchData();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        getCategoryList();
+    
+    
     }, [loading, user]);
 
     useEffect(() => {
@@ -265,10 +258,11 @@ const ItemList = ({ user }) => {
 
                 </div >
                 <Table
-                    expandable={{
-                        expandedRowRender,
-                        defaultExpandedRowKeys: ['0'],
-                    }}
+                   expandable={{
+                    expandedRowRender:record => {
+                        return  <Table columns={nestedcolumns} dataSource={record.category} pagination={false} />;
+                    },
+                  }}
                     style={{
                         marginTop: '10px'
                     }} columns={columns} dataSource={tableList} />

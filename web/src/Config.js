@@ -8,6 +8,6 @@ export const Config = {
     apiKey: 'ce90b9d7-2422-4e79-9e47-49fe80f9e623',
     auth_rules: {
         user: ['/items', '/profile','/category'],
-        admin: ['/profile','/userlist','/rolelist', '/items', '/category','/report']
+        admin: ['/profile','/userlist','/rolelist', '/items', '/category','/report','/sales']
     }
 }

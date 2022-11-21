@@ -14,6 +14,7 @@ import Navbar from "./components/Navbar";
 import UserList from "./pages/user/User";
 import Category from "./pages/category/Category";
 import Role from "./pages/role/Role";
+import Sales from "./pages/sales/Sales";
 import Profile from "./pages/user/Profile";
 import TitleComponent from "./components/TitleComponent";
 import ConfirmComponent from "./components/ConfirmComponent";
@@ -104,6 +105,7 @@ function App() {
                 <Route path="/register" element={<RegisterV2 handleAction={handleAction}/>}/>
                 <Route path="/userlist" element={<UserList user={user}/>}/>
                 <Route path="/category" element={<Category user={user}/>}/>
+                <Route path="/sales" element={<Sales user={user}/>}/>
                 <Route path="/rolelist" element={<Role user={user}/>}/>
                 <Route path="/report" element={<Report user={user}/>}/>
                 <Route path="/profile" element={<Profile user={user} handleAction={handleAction}/>}/>

@@ -3,21 +3,14 @@ const mongoose = require('mongoose')
 // Database model for MongoDB
 const itemSchema = new mongoose.Schema({
     item_name: { type: String },
-    category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
-    // category: [{
-    //     id: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
-    //     category_name: { type: String },
-    // }],
-    category_part: [{
-        id: { type: mongoose.Schema.Types.ObjectId, ref: 'item' },
-        category_name: { type: String },
-        item_name: { type: String },
-        needed_qty: { type: Number },
-        total_price: { type: Number },
-    }],
+    //category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+    category: [{
+         category_name: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+        //category_name: { type: String },
+     }],
+
     price: { type: Number },
     stock: { type: Number },
-    needed_qty: { type: Number },
     digikey_part_num: { type: String },
     supplier_link: { type: String },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },

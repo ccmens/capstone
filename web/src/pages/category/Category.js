@@ -126,25 +126,6 @@ const Category = ({ user }) => {
     ];
 
 
-
-    const getPartItemList = (ids) => {
-        console.log('ids=', ids)
-        // return 'aaaa';
-        if (!ids) {
-            return 'item is empty';
-        }
-        let text = "";
-        const list = [];
-        ids.forEach(id => {
-            const item = itemList.find(item => item._id === id);
-            if (item) {
-                list.push(item);
-                
-                text +=  item.item_name + '\r\n';
-            }
-        });
-        return text;
-    }
     
         const nestedcolumns = [
           {
