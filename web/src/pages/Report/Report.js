@@ -44,6 +44,7 @@ const ItemList = ({ user }) => {
     const [categoryList, setCategoryList] = useState([]);
     const [search, setSearch] = useState("");
     const [totalBox, settotalBox] = useState([]);
+    
     const BUTTON = styled(Button)`
         border-radius: 20px;
         width: 75px;
@@ -56,7 +57,32 @@ const ItemList = ({ user }) => {
         height: 40px;
         
     `
+useEffect(()=>{
+//const result =  categoryListAPI();
+//console.log("result: " + result.data);
 
+    async function getDataList() {
+            try {
+                const cateResult = await categoryListAPI();
+                const cateList = cateResult.data;
+                const itemResult = await itemListAPI();
+                const itemList = itemResult.data;
+              //  cont itemListReult = 
+                setCategoryList(cateList);
+                setItemList(itemList);
+                
+                
+            } catch (error) {
+                console.log('getCategorylist is error: ', error.message);
+            }
+        }
+        
+        getDataList();
+    },[])
+    // dataOutput samples
+    console.log("categoryList: "+ categoryList.length);
+    console.log("itemList: "+ itemList.length);
+    
     const productBox = [
         {
             productID: 1,
@@ -64,7 +90,7 @@ const ItemList = ({ user }) => {
             productType: "product",
             dataIndex: "category",
             render: (_, row) => {
-                return (<span>{row.category_name.count}</span>);
+                return (<span>{row.item_name.categoryList.length}</span>);
             }
         },
         {
@@ -73,7 +99,7 @@ const ItemList = ({ user }) => {
             productType: "part",
             dataIndex: 'stock',
             render: (_, row) => {
-                return (<span>{row.item_name.count}</span>);
+                return (<span>{row.item_name.length}</span>);
             }
         },
         {
@@ -83,7 +109,7 @@ const ItemList = ({ user }) => {
             dataIndex: "stock",
             render: (_, row) => {
                 if (row.stock < 10 && row.stock > 0) {
-                    return (<span>{row.item_name.count}</span>);
+                    return (<span>{row.item_name.length}</span>);
                 }
             }
         },
@@ -94,7 +120,7 @@ const ItemList = ({ user }) => {
             dataIndex: "stock",
             render: (_, row) => {
                 if (row.stock == 0) {
-                    return (<span>{row.item_name.count}</span>);
+                    return (<span>{row.item_name.length}</span>);
                 }
             }
         },
@@ -154,6 +180,7 @@ const ItemList = ({ user }) => {
             const categorys = await HandleAction('category-list');
             if (categorys) {
                 setCategoryList(categorys.data);
+                console.log("categorys.data: " +categorys.data);
             }
         }
         fetchData();

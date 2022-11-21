@@ -18,7 +18,6 @@ import Profile from "./pages/user/Profile";
 import TitleComponent from "./components/TitleComponent";
 import ConfirmComponent from "./components/ConfirmComponent";
 import RegisterV2 from "./pages/user/RegisterV2";
-import BannerSection from "./components/BannerSection";
 import Item from "./pages/item/Item";
 import Report from "./pages/Report/Report";
 
@@ -98,7 +97,6 @@ function App() {
         <>
             <TitleComponent user={user} isTokenLogin={isTokenLogin}/>
             <Navbar user={user} handleLogout={handleLogout}/>
-            <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white'/>
             <Routes>
                 <Route path="/" element={<Home user={user}/>}/>
                 <Route path="/items" element={<Item user={user}/>}/>
