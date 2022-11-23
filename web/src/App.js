@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginV2 from './pages/user/LoginV2';
-import AuthRoute from "./routes/AuthRoute";
+
 import {message} from 'antd';
 import {inactive, login, logout, profile, register, tokenLogin as tokenLoginAPI} from '@services/api.service';
 import ErrorPage403 from './ErrorPage403';
@@ -100,21 +100,14 @@ function App() {
             <Navbar user={user} handleLogout={handleLogout}/>
             <Routes>
                 <Route path="/" element={<Home user={user}/>}/>
+                <Route path="/items" element={<Item user={user}/>}/>
                 <Route path="/login" element={<LoginV2 handleAction={handleAction}/>}/>
                 <Route path="/register" element={<RegisterV2 handleAction={handleAction}/>}/>
-                <Route exact path='/items' element={<AuthRoute/>}/>
-                <Route path="/items" element={<Item user={user}/>} requiresAuth="true"/>
-                <Route exact path='/userlist' element={<AuthRoute/>}/>
                 <Route path="/userlist" element={<UserList user={user}/>}/>
-                <Route exact path='/category' element={<AuthRoute/>}/>
                 <Route path="/category" element={<Category user={user}/>}/>
-                <Route exact path='/sales' element={<AuthRoute/>}/>
                 <Route path="/sales" element={<Sales user={user}/>}/>
-                <Route exact path='/rolelist' element={<AuthRoute/>}/>
                 <Route path="/rolelist" element={<Role user={user}/>}/>
-                <Route exact path='/report' element={<AuthRoute/>}/>
                 <Route path="/report" element={<Report user={user}/>}/>
-                <Route exact path='/profile' element={<AuthRoute/>}/>
                 <Route path="/profile" element={<Profile user={user} handleAction={handleAction}/>}/>
                 <Route path="/error403" element={<ErrorPage403/>}/>
                 <Route path="/error404" element={<ErrorPage404/>}/>
