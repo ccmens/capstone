@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, Navigate,useNavigate} from "react-router-dom";
 import {Helmet, HelmetProvider} from 'react-helmet-async';
 import {Config} from '../Config'
 const TitleComponent = ({
@@ -15,7 +15,7 @@ const TitleComponent = ({
         console.log('pathname', pathname);
         if (Config.auth_rules.user.includes(pathname) || Config.auth_rules.admin.includes(pathname)) {
             if (!user) {
-                navigate('/error403');
+                <Navigate to='/error403'/>;
                 return;
             }
             var isPass = false;
@@ -26,7 +26,7 @@ const TitleComponent = ({
                 isPass = true;
             }
             if (!isPass) {
-                navigate('/error403');
+                <Navigate to='/error403'/>;
                 return;
             }
         }

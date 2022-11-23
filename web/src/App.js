@@ -1,9 +1,8 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
-import {Route, Routes, useNavigate} from 'react-router-dom';
+import React, {useEffect, useState,Fragment} from 'react';
+import {Route, Routes, useNavigate,Router} from 'react-router-dom';
 import Home from './pages/home/Home';
 import LoginV2 from './pages/user/LoginV2';
-
 import {message} from 'antd';
 import {inactive, login, logout, profile, register, tokenLogin as tokenLoginAPI} from '@services/api.service';
 import ErrorPage403 from './ErrorPage403';
@@ -21,6 +20,7 @@ import ConfirmComponent from "./components/ConfirmComponent";
 import RegisterV2 from "./pages/user/RegisterV2";
 import Item from "./pages/item/Item";
 import Report from "./pages/Report/Report";
+import AuthRoute from './routes/AuthRoute';
 
 function App() {
 
@@ -98,22 +98,22 @@ function App() {
         <>
             <TitleComponent user={user} isTokenLogin={isTokenLogin}/>
             <Navbar user={user} handleLogout={handleLogout}/>
-            <Routes>
-                <Route path="/" element={<Home user={user}/>}/>
-                <Route path="/items" element={<Item user={user}/>}/>
+
+        <Routes>
+                 <Route path="/" element={<Home user={user}/>}/>
                 <Route path="/login" element={<LoginV2 handleAction={handleAction}/>}/>
                 <Route path="/register" element={<RegisterV2 handleAction={handleAction}/>}/>
-                <Route path="/userlist" element={<UserList user={user}/>}/>
-                <Route path="/category" element={<Category user={user}/>}/>
-                <Route path="/sales" element={<Sales user={user}/>}/>
-                <Route path="/rolelist" element={<Role user={user}/>}/>
-                <Route path="/report" element={<Report user={user}/>}/>
-                <Route path="/profile" element={<Profile user={user} handleAction={handleAction}/>}/>
+                <Route exact path="/items" element={<AuthRoute><Item user={user}/></AuthRoute>} />
+                <Route path="/userlist" element={<AuthRoute> <UserList user={user}/></AuthRoute>} />
+                <Route path="/category" element={<AuthRoute> <Category user={user}/> </AuthRoute>}/>
+                <Route path="/sales" element={<AuthRoute><Sales user={user}/></AuthRoute>}/>
+                <Route path="/rolelist" element={<AuthRoute><Role user={user}/></AuthRoute>}/>
+                <Route path="/report" element={<AuthRoute><Report user={user}/></AuthRoute>}/>
+                <Route path="/profile" element={<AuthRoute><Profile user={user} handleAction={handleAction}/></AuthRoute>}/>
                 <Route path="/error403" element={<ErrorPage403/>}/>
                 <Route path="/error404" element={<ErrorPage404/>}/>
                 <Route path="/error500" element={<ErrorPage500/>}/>
             </Routes>
-
             <Footer/>
         </>
     );
