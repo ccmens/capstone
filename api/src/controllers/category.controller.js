@@ -8,7 +8,6 @@ const categoryController = {};
 categoryController.list = async (req, res) => {
     try {
         const categorys = await categoryModel.find().populate("needed_part.part");
-        console.log("--------",categorys);
         res.json({
             status: 'success',
             data: categorys

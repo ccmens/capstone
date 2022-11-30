@@ -5,11 +5,8 @@ import {
     roleList as roleListAPI, roleAdd, roleUpdate, roleDelete
 } from '@services/api.service';
 import CategoryForm from './components/RoleForm';
-import BannerSection from '@components/BannerSection';
-// import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
-import AdminManageBar from "../../components/AdminManageBar";
-import UserManageBar from "../../components/UserManageBar";
+
 
 async function HandleAction(action, id, params) {
     try {

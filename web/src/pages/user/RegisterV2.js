@@ -2,7 +2,6 @@ import React from "react";
 import "./User.css";
 import styled from "styled-components";
 import { message, Button, Form, Input, Space } from "antd";
-import BannerSection from "@components/BannerSection";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterV2({ handleAction }) {

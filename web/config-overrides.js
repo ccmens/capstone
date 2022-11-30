@@ -7,6 +7,6 @@ module.exports = function override(config) {
     '@datas': 'src/datas',
     '@services': 'src/services'
   })(config);
-
+  config.ignoreWarnings = [/Failed to parse source map/];
   return config;
 };

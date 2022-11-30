@@ -11,8 +11,7 @@ import ExportButton from '@components/ExportButton';
 import {ExportToCsv} from '@components/ExportUtils';
 
 import moment from 'moment';
-import AdminManageBar from "../../components/AdminManageBar";
-import UserManageBar from "../../components/UserManageBar";
+
 
 async function HandleAction(action, id, params) {
     try {

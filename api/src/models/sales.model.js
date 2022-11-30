@@ -5,7 +5,7 @@ const salesSchema = new mongoose.Schema({
     
     category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
     sales_qty: { type: Number },
-    stock:{type:Number},
+    total_sales:{type:Number},
     created_at: { type: Date, default: Date.now },
 
 })

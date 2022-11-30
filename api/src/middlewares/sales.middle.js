@@ -14,7 +14,7 @@ salesMiddle.valid_item = [
 salesMiddle.getSales = async (req, res, next) => {
     try {
         const sale = await salesModel.findOne({ _id: req.params.id }).populate('category');
-        console.log('----getSales:', sale);
+       // console.log('----getSales:', sale);
         if (sale == null) {
             return res.status(404).json({ status: 'error', message: 'Cannot find sale' })
         }

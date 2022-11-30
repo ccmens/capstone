@@ -40,31 +40,62 @@ salesController.add = async (req, res) => {
   try {
     console.log('add:', req.body)
     const {category,sales_qty } = req.body;
-    
+
+//define total_sales
+    const findProduct =  await categoryModel.find({"_id":category});
+    let unit_price = 0;
+    unit_price = findProduct.map(item => item.category_price);
+    const total_sales = unit_price * sales_qty;
+
     const sale = new salesModel({
      
       category: category,
       sales_qty: sales_qty,
+      total_sales:total_sales,
       //owner: res.user._id,
       //stock: res.category.category_qty - sales_qty,
     });
     await sale.save();
+    //update category_qty
+    const qty = sales_qty * (-1);
+    const categorys = await categoryModel.updateOne({ "_id": category },
+    { "$inc": { "category_qty": qty } });
     res
       .status(201)
       .json({ status: "success", message: "Add new sale successful" });
   } catch (error) {
     helper.resError(res, error.message);
   }
+  
 };
 
 salesController.update = async (req, res) => {
   try {
     const { category,sales_qty} = req.body;
-   
+    const tmp = res.sale.sales_qty;
+    // update the stock 
+    let qty = 0;
+    if( tmp > sales_qty){
+      qty = (tmp - sales_qty) 
+      console.log("plus",qty);
+    }else{
+      qty =(sales_qty - tmp) * (-1); 
+      console.log(qty,"Minus");
+    }
+    //update the total sales amount
+    const findProduct =  await categoryModel.find({"_id":category});
+    let unit_price = 0;
+    unit_price = findProduct.map(item => item.category_price);
+
+    //update all the variables
     if (category) res.sale.category = category;
     if (sales_qty) res.sale.sales_qty = sales_qty;
+    res.sale.total_sales = sales_qty * unit_price;
+    const categorys = await categoryModel.updateOne({ "_id": category },
+    { "$inc": { "category_qty": qty } });
     res.sale.updated_at = Date.now();
 
+console.log(res.sale.sales_qty);
     await res.sale.save();
     res
       .status(201)
@@ -76,6 +107,9 @@ salesController.update = async (req, res) => {
 
 salesController.delete = async (req, res) => {
   try {
+
+    const categorys = await categoryModel.updateOne({ "_id": res.sale.category },
+    { "$inc": { "category_qty": res.sale.sales_qty } });
     await res.sale.remove();
     res.json({ status: 'success', message: 'Sales deleted' });
 } catch (error) {

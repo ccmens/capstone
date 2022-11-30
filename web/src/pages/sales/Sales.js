@@ -3,10 +3,9 @@ import './Sales.css';
 import {  Button, Col, Input, message, Row, Space, Table} from 'antd';
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
-import { StopOutlined } from '@ant-design/icons';
 import {
     salesList as salesListAPI,salesAdd, salesUpdate, salesDelete,
-    categoryList as categoryListAPI,categoryUpdate,
+    categoryList as categoryListAPI,
 } from '@services/api.service';
 import SalesForm from './components/SalesForm';
 import ConfirmComponent from '@components/ConfirmComponent';
@@ -25,7 +24,7 @@ async function HandleAction(action, id, params) {
         } else if (action === 'delete') {
             await salesDelete(id);
         }
-        else if (action === 'item-list') {
+        else if (action === 'sales-list') {
              await salesListAPI();
         } else if (action === 'category-list') {
             await categoryListAPI();
@@ -65,6 +64,7 @@ const Sales = ({ user }) => {
     };
 
 
+
     const columns = [
         
         {
@@ -81,13 +81,10 @@ const Sales = ({ user }) => {
         {
             title: 'Updated Product Inventory',
             dataIndex: 'category',
-            //render: (_, row) => {
-                //row.category.category_qty = row.category.category_qty -  0;
-            //},
-
-             render: (_, row) => {
-                
-             },
+            render: (_, row) => {
+                const stock = Number(row.category.category_qty);
+                return stock;
+            }
            
         },
         {
@@ -96,7 +93,8 @@ const Sales = ({ user }) => {
         },
         {
             title: 'Total Sell ($CAD)',
-            //dataIndex: 'category_price',
+            dataIndex: 'total_sales',
+            
         },
         {
             title: 'Create At',
@@ -130,8 +128,7 @@ const Sales = ({ user }) => {
         }
     ];
 
-
-
+    
     
 
     useEffect(() => {

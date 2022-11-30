@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Button, Select, message, Upload, InputNumber } from "antd";
+import { Modal, Form, Button, Select, InputNumber } from "antd";
 import React, { useState, useEffect } from 'react';
 
 
@@ -9,36 +9,21 @@ const SalesForm = ({
     setIsFormVisible,
     categoryList,
 }) => {
-    const [formRef, setFormRef] = useState(null);;
-    
-  
+    const [formRef, setFormRef] = useState(null);
 
+
+  
     useEffect(() => {
         if (formRef) {
             formRef.setFieldsValue({
                 category: currentRow?.category?._id || categoryList[0]?._id,
                 //price: currentRow?.price,
                 sales_qty: currentRow?.sales_qty,
-                //stock: currentRow?.category?.category_qty - sales.qty;
+                //category_qty: qty ||categoryList[0]?.category_qty,
             });
         }
     }, [formRef, currentRow, categoryList]);
 
-
-    const getItemOptions = (ids) => {
-        if (!ids || ids.length === 0) {
-            return [];
-        }
-        const options = [];
-        const findList = categoryList.filter((item) => ids.includes(item._id));
-        findList.forEach((item) => {
-            options.push({
-                label: item.category_qty,
-                value: item._id,
-            });
-        });
-        return options;
-    }
 
     return (
         <Modal
@@ -72,12 +57,15 @@ const SalesForm = ({
                     label="Product"
                     name="category"
                     rules={[{ required: true, message: "Please select a product!" }]}
+                    
                 >
+                    
                     <Select
                         options={categoryList.map((item) => ({
                             value: item._id,
                             label: item.category_name,
                         }))}
+                        //onChange={handleChangeCategory}
                     />
                 </Form.Item>
                 {/** 
@@ -92,11 +80,26 @@ const SalesForm = ({
                 <Form.Item
                     label="Sales Quantity"
                     name="sales_qty"
-                    rules={[{ required: true, message: "Please enter price!",  }]}
+                    rules={[{ required: true, message: "Please enter sales quantity!",  }]}
                 >
-                     <InputNumber min={1}/>
+                     <InputNumber min={1} />
                 </Form.Item>
 
+                {/**
+                <Form.Item
+                    label="Category Quantity"
+                    name="category_qty"
+                    shouldUpdate={(prevValues, curValues) =>
+                    prevValues.needed_part !== curValues.needed_part}
+                    values={qty}    
+                >
+                    
+                     <Input min={1} value={qty} 
+                     
+                     disabled/>
+
+                </Form.Item>
+ */}
                 <Form.Item
                     wrapperCol={{
                         offset: 8,

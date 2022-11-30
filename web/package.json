@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^4.7.0",
+    "@ant-design/plots": "^1.2.2",
+    "@antv/layout": "^0.3.10",
+    "@antv/x6-react-components": "^2.0.4",
     "antd": "^4.22.3",
     "axios": "^0.27.2",
     "moment": "^2.29.4",
@@ -43,6 +47,7 @@
   },
   "devDependencies": {
     "react-app-rewire-alias": "^1.1.7",
-    "react-app-rewired": "^2.2.1"
+    "react-app-rewired": "^2.2.1",
+    "source-map-loader": "^4.0.1"
   }
 }

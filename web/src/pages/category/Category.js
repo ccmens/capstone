@@ -9,11 +9,8 @@ import {
     itemList as itemListAPI
 } from '@services/api.service';
 import CategoryForm from './components/CategoryForm';
-import BannerSection from '@components/BannerSection';
 import ConfirmComponent from '@components/ConfirmComponent';
 import moment from 'moment';
-import AdminManageBar from "../../components/AdminManageBar";
-import UserManageBar from "../../components/UserManageBar";
 
 async function HandleAction(action, id, params) {
     try {
@@ -39,7 +36,6 @@ const Category = ({ user }) => {
 
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
-    const [tableList, setTableList] = useState([]);
     const [itemList, setItemList] = useState([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
     const [currentRow, setCurrentRow] = useState(null);
@@ -68,7 +64,7 @@ const Category = ({ user }) => {
             title: 'Product Stock',
             dataIndex: 'category_qty',
             render: (_, row) => {
-                if (row.category_qty == 0) {
+                if (row.category_qty === 0) {
                     return (
                         <span style={{ color: 'red' }}>
                             <StopOutlined /><span> Out of stock</span>
