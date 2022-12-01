@@ -66,21 +66,21 @@ const Navbar = ({ user, handleLogout }) => {
                 {
                     key: '1',
                     label: (
-                        <Link to='/userlist'>User Management</Link>
+                        <Link to='/userlist'>User</Link>
                     ),
                     icon: <UserOutlined />
                 },
                 {
                     key: '2',
                     label: (
-                        <Link to='/rolelist'>Role Management</Link>
+                        <Link to='/rolelist'>Role</Link>
                     ),
                     icon: <LogoutOutlined />,
                 },
                 {
                     key: '3',
                     label: (
-                        <Link to='/items'>Parts Management</Link>
+                        <Link to='/items'>Parts</Link>
 
                     ),
                     icon: <LogoutOutlined />,
@@ -88,12 +88,26 @@ const Navbar = ({ user, handleLogout }) => {
                 {
                     key: '4',
                     label: (
-                        <Link to='/category'>Products Management</Link>
+                        <Link to='/category'>Products</Link>
                     ),
                     icon: <LogoutOutlined />,
                 },
                 {
                     key: '5',
+                    label: (
+                        <Link to='/report'>Report</Link>
+                    ),
+                    icon: <LogoutOutlined />,
+                },
+                {
+                    key: '6',
+                    label: (
+                        <Link to='/sales'>Sales</Link>
+                    ),
+                    icon: <LogoutOutlined />,
+                },
+                {
+                    key: '7',
                     label: (
                         <Link to='/profile'>
                             Profile
@@ -102,7 +116,7 @@ const Navbar = ({ user, handleLogout }) => {
                     icon: <UserOutlined />
                 },
                 {
-                    key: '6',
+                    key: '8',
                     label: (
                         <span onClick={handleLogout}>
                             Logout
