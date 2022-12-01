@@ -7,10 +7,6 @@ export default function Footer() {
             <div className="footer-one">
                 &copy; Copyright 2022 & Capstone Project
             </div>
-            <div className="footer-two">
-            </div>
-            <div className="footer-three">
-            </div>
             <div className="footer-four">
                 <a href="http://varosc.net/"><img src="/images/logo.jpg" width={40} /></a>
                 <a href="https://www.etsy.com/shop/VariableOscillations"><img src="/images/etsy.jpg" width={70} /></a>

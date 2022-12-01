@@ -15,10 +15,14 @@
 
 .flex {
     display: flex;
+    flex-direction: row;
+
+
 }
 
 .justify-between {
     justify-content: space-between;
+
 }
 
 .search-header {
@@ -72,4 +76,14 @@
     background-color: #ffa500;
     color: black;
     border-color: #ffa500;
+}
+
+
+@media (max-width: 1250px) {
+    .flex {
+
+        flex-direction: column;
+    }
+
+    /* … */
 }

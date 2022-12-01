@@ -5,6 +5,9 @@ footer {
   height: 100px;
   width: 100%;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
 }
 
 a {
@@ -17,12 +20,12 @@ a {
 
 .footer-one {
   width: 25%;
-  float: left;
+  /* float: left; */
   text-align: left;
   padding-left: 60px;
 }
 
-.footer-two {
+/* .footer-two {
   width: 25%;
   float: left;
 }
@@ -30,11 +33,29 @@ a {
 .footer-three {
   width: 25%;
   float: left;
-}
+} */
 
 .footer-four {
   width: 25%;
-  float: left;
+  /* float: left; */
   text-align: right;
   padding-right: 60px;
+}
+
+
+@media (max-width: 1250px) {
+
+  .footer-one {
+
+    width: 50%;
+
+  }
+
+  .footer-four {
+    width: 50%;
+  }
+
+  footer {
+    justify-content: space-between;
+  }
 }
