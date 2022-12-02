@@ -52,7 +52,7 @@ const Category = ({ user }) => {
     };
 
     const columns = [
-        
+
         {
             title: 'Products Name',
             dataIndex: 'category_name',
@@ -122,28 +122,27 @@ const Category = ({ user }) => {
     ];
 
 
-    
-        const nestedcolumns = [
-          {
+
+    const nestedcolumns = [
+        {
             title: 'Part Name',
             dataIndex: 'part',
-            key:"items",
-            render:(_,row) => row.part?.item_name,
-            
-          },
-          
-          {
-            title: 'Needed QTY',
-            dataIndex: 'needed_qty',
-          },
-          /*
-          {
+            key: "items",
+            render: (_, row) => row.part?.item_name,
+
+        },
+        {
             title: 'Unit Price',
             dataIndex: 'price',
-          },
-          */
-        ];
-    
+            key: "items",
+            render: (_, row) => row.part?.price,
+        },
+        {
+            title: 'Needed QTY',
+            dataIndex: 'needed_qty',
+        },
+    ];
+
 
     useEffect(() => {
         if (!loading || !user) {
@@ -158,8 +157,8 @@ const Category = ({ user }) => {
                 const result = await categoryListAPI();
                 const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setCategoryList(list);
-               
-                
+
+
             } catch (error) {
                 console.log('getCategorylist is error: ', error.message);
             }
@@ -204,17 +203,17 @@ const Category = ({ user }) => {
                     currentRow={currentRow}
                     itemList={itemList}
                 />
-                
-                <Table 
-                columns={columns} 
-                expandable={{
-                    expandedRowRender:record => {
-                        return  <Table columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
-                    },
-                    //defaultExpandedRowKeys: ['0'],
-                  }}
-                dataSource={categoryList}/>
-                
+
+                <Table
+                    columns={columns}
+                    expandable={{
+                        expandedRowRender: record => {
+                            return <Table columns={nestedcolumns} dataSource={record.needed_part} pagination={false} />;
+                        },
+                        //defaultExpandedRowKeys: ['0'],
+                    }}
+                    dataSource={categoryList} />
+
             </div>
         </>
     );
