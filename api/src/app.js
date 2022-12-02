@@ -7,6 +7,28 @@ const bodyParser = require("body-parser");
 const path = require('path');
 const rootPath = path.dirname(path.dirname(require.main.filename));
 
+// Https Server Start
+const https = require('https');
+const fs = require('fs');
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/varoscmgmt.net/privkey.pem', 'utf8'); // key
+const certificate = fs.readFileSync('/etc/letsencrypt/live/varoscmgmt.net/fullchain.pem', 'utf8'); // certificate
+const ca = fs.readFileSync('/etc/letsencrypt/live/varoscmgmt.net/chain.pem', 'utf8'); // chain
+
+const credentials = {
+  key: privateKey,
+  cert: certificate,
+  ca: ca
+};
+
+//?
+app.use(express.static('public'));
+
+const httpsServer = https.createServer(credentials, app);
+// Https Server End
+
+
+
+
 const mongoose = require('mongoose');
 // connect to the database
 mongoose.connect(config.database_url, { useNewUrlParser: true });
@@ -26,11 +48,11 @@ app.get(`${config.prefix}/test`, async (req, res) => {
 });
 
 app.get('/public/static/*', function (req, res) {
-    res.sendFile(rootPath + "/" + req.url);
+  res.sendFile(rootPath + "/" + req.url);
 })
 
 app.get('/public/upload/*', function (req, res) {
-    res.sendFile(rootPath + "/" + req.url);
+  res.sendFile(rootPath + "/" + req.url);
 })
 
 const authMiddle = require("./middlewares/auth.middle");
@@ -66,7 +88,16 @@ async function initRole() {
 
 initRole();
 
-app.listen(config.server_port, config.server_host, () => {
-  console.log("Server Started, The port is " + config.server_port);
+// local server
+
+// app.listen(config.server_port, config.server_host, () => {
+//   console.log("Server Started, The port is " + config.server_port);
+// });
+
+// Https Server Start
+
+httpsServer.listen('8443', () => {
+  console.log('listening on https://varoscmgmt.net:8443');
 });
+// Https server end
 
