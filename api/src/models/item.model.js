@@ -5,9 +5,9 @@ const itemSchema = new mongoose.Schema({
     item_name: { type: String },
     //category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
     category: [{
-         category_name: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+        category_name: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
         //category_name: { type: String },
-     }],
+    }],
 
     price: { type: Number },
     stock: { type: Number },
