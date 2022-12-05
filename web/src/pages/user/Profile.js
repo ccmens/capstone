@@ -52,7 +52,7 @@ const Profile = ({user, handleAction}) => {
     const handleInactive = () => {
         ConfirmComponent(async () => {
             await handleAction('inactive', user?._id);
-        }, 'Are you sure to inactive your account?', 'if you inactive your account, you will not be able to login again');
+        }, 'Are you sure to inactivate your account?', 'if you inactivate your account, you will not be able to login again');
     }
 
     const handleChange = (res) => {
@@ -143,7 +143,7 @@ const Profile = ({user, handleAction}) => {
 
                     <Form.Item>
                         <Button type="danger" onClick={handleInactive}>
-                            Deactive Account
+                            Deactivate Account
                         </Button>
                     </Form.Item>
 

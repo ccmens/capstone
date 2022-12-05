@@ -97,7 +97,7 @@ const Sales = ({ user }) => {
             
         },
         {
-            title: 'Create At',
+            title: 'Created At',
             dataIndex: 'created_at',
             render: (text) => moment(text).format('YYYY-MM-DD HH:mm')
         },
