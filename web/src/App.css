@@ -33,11 +33,23 @@ main {
     margin: 0 auto;
 }
 
+.ant-table table{
+    text-align: left;
+}
 
 .ant-table-thead tr th {
     background-color: #000;
     color: #fff;
+
     font-size: 18px;
+}
+
+.ant-modal-title{
+    color: white;
+}
+
+.ant-modal-close{
+    color: white;
 }
 
 .common-title {
