@@ -138,7 +138,7 @@ const Navbar = ({ user, handleLogout }) => {
                             onMouseOver={() => setImgtHover(true)}
                             onMouseOut={() => setImgtHover(false)}
                         >
-                            <NavLink to="/">
+                            <NavLink to="/report">
                                 <img
                                     src={ImgtHover ? logoh : logo} width={80}
                                 /></NavLink>

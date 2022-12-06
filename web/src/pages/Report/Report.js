@@ -8,6 +8,7 @@ import {
     itemList as itemListAPI,
 } from "@services/api.service";
 import { Report } from "./components/Report";
+import Dashboard from "../../components/Dashboard";
 import ExportButton from '@components/ExportButton';
 import { ExportToCsv } from '@components/ExportUtils';
 
@@ -44,7 +45,7 @@ const ItemList = ({ user }) => {
     const [categoryList, setCategoryList] = useState([]);
     const [search, setSearch] = useState("");
     const [totalBox, settotalBox] = useState([]);
-    
+
     const BUTTON = styled(Button)`
         border-radius: 20px;
         width: 75px;
@@ -57,32 +58,32 @@ const ItemList = ({ user }) => {
         height: 40px;
         
     `
-useEffect(()=>{
-//const result =  categoryListAPI();
-//console.log("result: " + result.data);
+    useEffect(() => {
+        //const result =  categoryListAPI();
+        //console.log("result: " + result.data);
 
-    async function getDataList() {
+        async function getDataList() {
             try {
                 const cateResult = await categoryListAPI();
                 const cateList = cateResult.data;
                 const itemResult = await itemListAPI();
                 const itemList = itemResult.data;
-              //  cont itemListReult = 
+                //  cont itemListReult = 
                 setCategoryList(cateList);
                 setItemList(itemList);
-                
-                
+
+
             } catch (error) {
                 console.log('getCategorylist is error: ', error.message);
             }
         }
-        
+
         getDataList();
-    },[])
+    }, [])
     // dataOutput samples
-    console.log("categoryList: "+ categoryList.length);
-    console.log("itemList: "+ itemList.length);
-    
+    console.log("categoryList: " + categoryList.length);
+    console.log("itemList: " + itemList.length);
+
     const productBox = [
         {
             productID: 1,
@@ -132,9 +133,9 @@ useEffect(()=>{
             render: (_, row) => {
                 if (row.stock < 10) {
                     return (
-                    <img alt={row.name} width={100} height={100}
-                    src={row.image || '/images/default-item.png'}
-                    style={{'object-fit': 'contain'}} />
+                        <img alt={row.name} width={100} height={100}
+                            src={row.image || '/images/default-item.png'}
+                            style={{ 'object-fit': 'contain' }} />
                     )
                 }
             }
@@ -156,7 +157,7 @@ useEffect(()=>{
             render: (_, row) => {
                 if (row.stock < 10) {
                     return (
-                        <span style={{ color: 'red', fontSize: 20}}>
+                        <span style={{ color: 'red', fontSize: 20 }}>
                             {row.stock} left</span>
                     );
                 }
@@ -180,7 +181,7 @@ useEffect(()=>{
             const categorys = await HandleAction('category-list');
             if (categorys) {
                 setCategoryList(categorys.data);
-                console.log("categorys.data: " +categorys.data);
+                console.log("categorys.data: " + categorys.data);
             }
         }
         fetchData();
@@ -197,18 +198,21 @@ useEffect(()=>{
 
     return (
         <>
-        <div className='Box'>
-            {productBox.map(productBox => (
-                <Report
-                key={productBox.id}
-                name={productBox.name}
-                unitLeft={productBox.dataIndex}
-                />
-            ))}
-        </div>
+            {/* <div className='Box'>
+                {productBox.map(productBox => (
+                    <Report
+                        key={productBox.id}
+                        name={productBox.name}
+                        unitLeft={productBox.dataIndex}
+                    />
+                ))}
+            </div> */}
+
+            {user && <Dashboard user={user} />}
+
             <div className='item-wrap'>
 
-                <h3 className='common-title'>Low in Stock Part</h3>
+                <h3 className='common-title'>Low in Stock</h3>
 
                 <div className='flex justify-between'>
                     <Row>
@@ -235,8 +239,8 @@ useEffect(()=>{
                     </Row>
                 </div >
                 <Table style={{
-                        marginTop: '10px'
-                    }} columns={columns} dataSource={tableList} />
+                    marginTop: '10px'
+                }} columns={columns} dataSource={tableList} />
             </div>
         </>
     );

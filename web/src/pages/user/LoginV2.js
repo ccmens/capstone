@@ -35,7 +35,7 @@ export default function LoginV2({ handleAction }) {
     `
     return (
         <>
-        <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white' />
+            <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white' />
             <div className="login-wrap">
                 {/* <h3>Login</h3> */}
                 <div className="login-form">
@@ -102,16 +102,6 @@ export default function LoginV2({ handleAction }) {
                             </Space>
                         </Form.Item>
                     </Form>
-                    <Alert
-                        message="Test Accounts"
-                        description={`
-                            admin123@gmail.com,password (admin);
-                            admin456@gmail.com,password (admin);
-                            user123@gmail.com,password (user);
-                            user456@gmail.com,password (user)`}
-                        type="info"
-                        showIcon
-                    />
                 </div>
             </div>
         </>
