@@ -1,4 +1,5 @@
 const roleModel = require('../models/role.model');
+const userModel = require('../models/user.model');
 const helper = require('../utils/helper');
 
 const roleController = {};
@@ -56,6 +57,7 @@ roleController.update = async (req, res) => {
 roleController.delete = async (req, res) => {
     try {
         await res.role.remove();
+        await userModel.remove({"role" : res.role._id });
         res.json({ status: 'success', message: 'Role deleted' });
     } catch (error) {
         helper.resError(res, error.message);

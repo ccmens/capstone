@@ -67,8 +67,8 @@ const UserList = ({user}) => {
         },
         {
             title: "Role",
-            dataIndex: "role_name",
-            render: (_, row) => row.role.role_name,
+            dataIndex: "title",
+            render: (_, row) => row.role.title,
         },
         {
             title: "Name",

@@ -1,5 +1,6 @@
 const categoryModel = require('../models/category.model');
 const itemModel = require('../models/item.model');
+const salesModel = require('../models/sales.model');
 const helper = require('../utils/helper');
 
 const categoryController = {};
@@ -64,6 +65,9 @@ categoryController.update = async (req, res) => {
 categoryController.delete = async (req, res) => {
     try {
         await res.category.remove();
+        //const sale = await salesModel.find({category : category._id});
+        await salesModel.remove({"category" : res.category._id });
+
         res.json({ status: 'success', message: 'product deleted' });
     } catch (error) {
         helper.resError(res, error.message);

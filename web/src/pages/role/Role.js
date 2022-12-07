@@ -6,7 +6,7 @@ import {
 } from '@services/api.service';
 import CategoryForm from './components/RoleForm';
 import moment from 'moment';
-
+import ConfirmComponent from '@components/ConfirmComponent';
 
 async function HandleAction(action, id, params) {
     try {
@@ -60,12 +60,14 @@ const Role = ({ user }) => {
                 <Space size="middle">
                     <Button onClick={() => showModal(row)}>Edit</Button>
                     <Button type="danger" onClick={() =>
-                        // ConfirmComponent(async () => {
-                        //     await HandleAction('delete', row._id, null);
-                        //     setLoading(true);
-                        // })
-                        message.error('Role cannot delete')
-                    }>Delete</Button>
+                         ConfirmComponent(async () => {
+                            await HandleAction('delete', row._id, null);
+                             setLoading(true);
+                        })
+                        //message.error('Role cannot delete')
+                    }>
+                         {row.deleted ? 'Delete Permanently' : 'Delete'}
+                    </Button>
                 </Space>
             ),
         }

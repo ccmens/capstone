@@ -72,7 +72,7 @@ userController.export = async (req, res) => {
         let results = [];
         const users = await userModel.find();
         for (const user of users) {
-            const items = await itemModel.find({ owner: user._id });
+            const items = await itemModel.find({ owner: user._x });
             const count = items.length;
             const total_value = await items.reduce((acc, item) => acc + item.price, 0);
             const tmp = {
@@ -312,6 +312,7 @@ userController.inactive = async (req, res) => {
         res.user.active = false;
         res.user.update_at = Date.now();
         await res.user.save();
+        
         res.status(201).json({ status: 'success', message: 'Inactive account successful' });
     } catch (error) {
         helper.resError(res, error.message);
