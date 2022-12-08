@@ -21,15 +21,15 @@ import moment from "moment";
 async function HandleAction(action, id, params) {
     try {
         if (action === "add") {
-             await itemAdd(params);
-        }else if (action === "update"){
+            await itemAdd(params);
+        } else if (action === "update") {
             await itemUpdate(id, params);
-        }else if (action === "delete"){
-             await itemDelete(id);
-        }else if (action === "recover"){
-             await itemRecover(id);
-        }else if (action === "export"){
-             await itemExport(id);
+        } else if (action === "delete") {
+            await itemDelete(id);
+        } else if (action === "recover") {
+            await itemRecover(id);
+        } else if (action === "export") {
+            await itemExport(id);
         }
         message.success('Handle action success');
         return true;
@@ -113,7 +113,7 @@ const ItemList = ({ user }) => {
                 } else if (row.stock < 10) {
                     return (
                         <span style={{ color: 'orange' }}>
-                            <span>Running low!<br/>{row.stock}</span>
+                            <span>Running low!<br />{row.stock}</span>
                         </span>
                     );
                 } else {
@@ -157,15 +157,15 @@ const ItemList = ({ user }) => {
 
     ];
 
-    
-        const nestedcolumns = [
-            {
-                title: 'Realted Procuct',
-                dataIndex: 'category_name',
-                render:(_,row) => row.category_name?.category_name,
-            },
 
-        ];
+    const nestedcolumns = [
+        {
+            title: 'Realted Procuct',
+            dataIndex: 'category_name',
+            render: (_, row) => row.category_name?.category_name,
+        },
+
+    ];
 
 
     useEffect(() => {
@@ -178,15 +178,15 @@ const ItemList = ({ user }) => {
 
         async function getItemList() {
 
-            try{
+            try {
                 const result = await itemListAPI();
                 const lists = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setItemList(lists);
                 setTableList(lists);
-            
-        } catch (error) {
-            console.log("getPartList is error: ", error.message);
-        }
+
+            } catch (error) {
+                console.log("getPartList is error: ", error.message);
+            }
         }
         getItemList();
 
@@ -200,8 +200,8 @@ const ItemList = ({ user }) => {
         }
 
         getCategoryList();
-    
-    
+
+
     }, [loading, user]);
 
     useEffect(() => {
@@ -235,18 +235,9 @@ const ItemList = ({ user }) => {
                     <Row>
                         <Space>
                             <BUTTON type="primary" size='large' onClick={() => showModal(null)}>Add</BUTTON>
-                            <ExportButton onExport={async () => {
-                                const result = await HandleAction('export', null, null);
-                                if (result) {
-                                    ExportToCsv(result.data, 'item-export.csv');
-                                } else {
-                                    message.error('Export is error, please try again');
-                                }
-                            }}>
-                                Export to CSV
-                            </ExportButton>
                         </Space>
                     </Row>
+
                     <Row>
                         <Col>
                             Search Item By Name:
@@ -258,11 +249,11 @@ const ItemList = ({ user }) => {
 
                 </div >
                 <Table
-                   expandable={{
-                    expandedRowRender:record => {
-                        return  <Table columns={nestedcolumns} dataSource={record.category} pagination={false} />;
-                    },
-                  }}
+                    expandable={{
+                        expandedRowRender: record => {
+                            return <Table columns={nestedcolumns} dataSource={record.category} pagination={false} />;
+                        },
+                    }}
                     style={{
                         marginTop: '10px'
                     }} columns={columns} dataSource={tableList} />

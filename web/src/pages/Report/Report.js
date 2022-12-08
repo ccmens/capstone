@@ -208,10 +208,12 @@ const ItemList = ({ user }) => {
                 ))}
             </div> */}
 
-            {user && <Dashboard user={user} />}
 
             <div className='item-wrap'>
 
+                <h3 className='common-title'>Report Dashboard</h3>
+
+                {user && <Dashboard user={user} />}
                 <h3 className='common-title'>Low in Stock</h3>
 
                 <div className='flex justify-between'>
@@ -225,7 +227,7 @@ const ItemList = ({ user }) => {
                                     message.error('Export is error, please try again');
                                 }
                             }}>
-                                Export to CSV
+                                Export Complete Item Inventory
                             </ExportButton>
                         </Space>
                     </Row>

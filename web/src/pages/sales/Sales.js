@@ -1,10 +1,10 @@
 
 import './Sales.css';
-import {  Button, Col, Input, message, Row, Space, Table} from 'antd';
+import { Button, Col, Input, message, Row, Space, Table } from 'antd';
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 import {
-    salesList as salesListAPI,salesAdd, salesUpdate, salesDelete,
+    salesList as salesListAPI, salesAdd, salesUpdate, salesDelete,
     categoryList as categoryListAPI,
 } from '@services/api.service';
 import SalesForm from './components/SalesForm';
@@ -18,14 +18,14 @@ async function HandleAction(action, id, params) {
     try {
         if (action === 'add') {
             await salesAdd(params);
-            
+
         } else if (action === 'update') {
             await salesUpdate(id, params);
         } else if (action === 'delete') {
             await salesDelete(id);
         }
         else if (action === 'sales-list') {
-             await salesListAPI();
+            await salesListAPI();
         } else if (action === 'category-list') {
             await categoryListAPI();
         }
@@ -66,17 +66,17 @@ const Sales = ({ user }) => {
 
 
     const columns = [
-        
+
         {
             title: 'Products Name',
             dataIndex: 'category',
             render: (_, row) => row.category?.category_name,
-           
+
         },
         {
             title: 'Sales Quantity ',
             dataIndex: 'sales_qty',
-            
+
         },
         {
             title: 'Updated Product Inventory',
@@ -85,7 +85,7 @@ const Sales = ({ user }) => {
                 const stock = Number(row.category.category_qty);
                 return stock;
             }
-           
+
         },
         {
             title: 'Total Cost ($CAD)',
@@ -94,7 +94,7 @@ const Sales = ({ user }) => {
         {
             title: 'Total Sell ($CAD)',
             dataIndex: 'total_sales',
-            
+
         },
         {
             title: 'Created At',
@@ -128,8 +128,8 @@ const Sales = ({ user }) => {
         }
     ];
 
-    
-    
+
+
 
     useEffect(() => {
         if (!loading || !user) {
@@ -144,8 +144,8 @@ const Sales = ({ user }) => {
                 const result = await salesListAPI();
                 const list = result.data.map((item, index) => ({ ...item, key: index + 1 }));
                 setSalesList(list);
-               
-                
+
+
             } catch (error) {
                 console.log('getSaleslist is error: ', error.message);
             }
@@ -166,8 +166,8 @@ const Sales = ({ user }) => {
         getCategoryList();
 
     }, [loading, user]);
-    
-console.log(categoryList);
+
+    console.log(categoryList);
     useEffect(() => {
         if (!search) {
             setTableList(salesList);
@@ -197,21 +197,11 @@ console.log(categoryList);
                     <Row>
                         <Space>
                             <BUTTON type="primary" size='large' onClick={() => showModal(null)}>Add</BUTTON>
-                            <ExportButton onExport={async () => {
-                                const result = await HandleAction('export', null, null);
-                                if (result) {
-                                    ExportToCsv(result.data, 'sales-export.csv');
-                                } else {
-                                    message.error('Export is error, please try again');
-                                }
-                            }}>
-                                Export to CSV
-                            </ExportButton>
                         </Space>
                     </Row>
                     <Row>
                         <Col>
-                            Search Product By Name:
+                            Search Sale By Product Name:
                             <Input value={search} size='large' onChange={(e) => setSearch(e.target.value)}
                                 placeholder="Enter product name" style={{ width: 200, marginLeft: '1rem', marginRight: '1rem' }} />
                             <BUTTON size='large' onClick={() => setSearch('')}>Clear</BUTTON>
