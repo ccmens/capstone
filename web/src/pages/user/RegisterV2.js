@@ -3,6 +3,7 @@ import "./User.css";
 import styled from "styled-components";
 import { message, Button, Form, Input, Space } from "antd";
 import { useNavigate } from "react-router-dom";
+import BannerSection from "../../components/BannerSection";
 
 export default function RegisterV2({ handleAction }) {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function RegisterV2({ handleAction }) {
 
   return (
     <>
-
+      <BannerSection title="Welcome To Variable Oscillations-Inventory MGMT" color='white' />
       <div className="register-wrap">
         {/* <h3>Register</h3> */}
         <div className="register-form">
