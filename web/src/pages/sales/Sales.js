@@ -87,10 +87,7 @@ const Sales = ({ user }) => {
             }
 
         },
-        {
-            title: 'Total Cost ($CAD)',
-            //dataIndex: 'category_price',
-        },
+
         {
             title: 'Total Sell ($CAD)',
             dataIndex: 'total_sales',
